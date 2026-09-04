@@ -587,7 +587,14 @@
     .topbar, .no-print, .main-tabs, .modal-overlay, #tab-impacto, #tab-roi { display: none !important; }
     #tab-proposta { display: block !important; }
     #screenConfig { display: none !important; }
-    #screenProposta { display: block !important; }
+    #screenProposta { display: none !important; }
+    .tela-resumo { display: block !important; position: static !important; inset: auto; padding: 0 !important; background: var(--bg-page) !important; }
+    .resumo-container { max-width: 100%; padding: 20px 24px; border: none; box-shadow: none; border-radius: 0; }
+    .resumo-valor-principal { font-size: 38px; }
+    .resumo-header { margin-bottom: 20px; padding-bottom: 16px; }
+    .resumo-items { gap: 10px; margin-top: 16px; }
+    .resumo-item { padding: 12px 16px; }
+    .resumo-roi { margin-top: 14px; padding: 16px; }
 
     .prop-wrap { max-width: 100%; padding: 0; margin: 0; background: var(--bg-page) !important; }
     .prop-sheet { box-shadow: none; background: var(--paper) !important; padding: 20px 24px; border-radius: 0; }
@@ -653,6 +660,7 @@
     --green-live: #059669;
     --shadow: 0 2px 10px rgba(16,24,40,0.08);
   }
+  html.light-theme .resumo-logo img { filter: invert(1) brightness(0.25); }
 
   /* ══════════════════════ RESUMO INTERATIVO ══════════════════════ */
   .resumo-section {
@@ -1590,27 +1598,27 @@
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 20px;">
       <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-card2); border: 1.5px solid var(--line); border-radius: 14px; cursor: pointer; transition: all 0.2s;">
-        <input type="checkbox" id="check-volumetria" checked style="width: 20px; height: 20px; cursor: pointer;">
+        <span class="rt-switch"><input type="checkbox" id="check-volumetria" checked/><span class="rt-slider"></span></span>
         <span style="font-size: 13.5px; font-weight: 600; color: var(--ink);">📊 Volumetria & Desconto</span>
       </label>
       
       <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-card2); border: 1.5px solid var(--line); border-radius: 14px; cursor: pointer; transition: all 0.2s;">
-        <input type="checkbox" id="check-canais" checked style="width: 20px; height: 20px; cursor: pointer;">
+        <span class="rt-switch"><input type="checkbox" id="check-canais" checked/><span class="rt-slider"></span></span>
         <span style="font-size: 13.5px; font-weight: 600; color: var(--ink);">💬 Canais Ativos</span>
       </label>
       
       <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-card2); border: 1.5px solid var(--line); border-radius: 14px; cursor: pointer; transition: all 0.2s;">
-        <input type="checkbox" id="check-mensagens" checked style="width: 20px; height: 20px; cursor: pointer;">
+        <span class="rt-switch"><input type="checkbox" id="check-mensagens" checked/><span class="rt-slider"></span></span>
         <span style="font-size: 13.5px; font-weight: 600; color: var(--ink);">📨 Consumo de Mensagens</span>
       </label>
       
       <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-card2); border: 1.5px solid var(--line); border-radius: 14px; cursor: pointer; transition: all 0.2s;">
-        <input type="checkbox" id="check-teto" checked style="width: 20px; height: 20px; cursor: pointer;">
+        <span class="rt-switch"><input type="checkbox" id="check-teto" checked/><span class="rt-slider"></span></span>
         <span style="font-size: 13.5px; font-weight: 600; color: var(--ink);">🎯 Teto de Consumo</span>
       </label>
       
       <label style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-card2); border: 1.5px solid var(--line); border-radius: 14px; cursor: pointer; transition: all 0.2s;">
-        <input type="checkbox" id="check-roi" checked style="width: 20px; height: 20px; cursor: pointer;">
+        <span class="rt-switch"><input type="checkbox" id="check-roi" checked/><span class="rt-slider"></span></span>
         <span style="font-size: 13.5px; font-weight: 600; color: var(--ink);">💰 ROI & Retorno</span>
       </label>
     </div>
@@ -2323,6 +2331,11 @@ function renderTotalPrevisto() {
   } else {
     roiEl.textContent = '—';
   }
+
+  // guarda os valores pra o resumo (tela sobreposta) poder ler
+  window.__receitaEstimada = receita;
+  window.__roiPercent = roi;
+  window.__roiValido = ticket > 0 && conversaoPct > 0;
 }
 ['tpTicket', 'tpConversao'].forEach(id => {
   const el = document.getElementById(id);
@@ -2336,22 +2349,16 @@ function verProposta() {
   validUntil.setDate(validUntil.getDate() + 7);
   document.getElementById('propValidDate').textContent =
     'Válida até ' + validUntil.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  const leadNameEl = document.getElementById('leadName');
-  const leadLine = document.getElementById('propLeadLine');
-  const leadName = leadNameEl ? leadNameEl.value.trim() : '';
-  if (leadName) {
-    document.getElementById('propLeadName').textContent = leadName;
-    leadLine.style.display = 'block';
-  } else {
-    leadLine.style.display = 'none';
-  }
   renderAll();
   renderTotalPrevisto();
-  document.body.classList.add('show-proposal');
+  atualizarTelaResumo();
+  document.getElementById('screenConfig').style.display = 'none';
+  document.getElementById('telaResumo').classList.add('show');
   window.scrollTo(0, 0);
 }
 function editarProposta() {
-  document.body.classList.remove('show-proposal');
+  document.getElementById('telaResumo').classList.remove('show');
+  document.getElementById('screenConfig').style.display = 'block';
   window.scrollTo(0, 0);
 }
 
@@ -2547,7 +2554,7 @@ renderAll();
       </div>
     </div>
     
-    <div class="resumo-actions">
+    <div class="resumo-actions no-print">
       <button class="btn-voltar" onclick="voltarConfig()">← Voltar</button>
       <button class="btn-primary" onclick="window.print()" style="flex: 1;">Gerar PDF</button>
     </div>
@@ -2555,164 +2562,129 @@ renderAll();
 </div>
 
 <script>
-// Função para abrir a tela do resumo
-function verPropostaComResumo() {
-  atualizarTelaResumo();
-  document.getElementById('screenConfig').style.display = 'none';
-  document.getElementById('telaResumo').classList.add('show');
-}
-
 // Função para voltar à configuração
 function voltarConfig() {
   document.getElementById('telaResumo').classList.remove('show');
   document.getElementById('screenConfig').style.display = 'block';
 }
 
-// Função para atualizar a tela do resumo com os dados
+// Função para atualizar a tela do resumo com os dados reais
 function atualizarTelaResumo() {
+  const tr = tierFor(state.atendidos);
+  const teto = TETOS[state.tetoIndex];
+  const consumo = consumoTotal();
+
   // Valor principal
   const valorPrincipal = document.getElementById('resumo-valor-principal');
-  if (valorPrincipal && window.topbarPriceValue) {
-    valorPrincipal.textContent = formatMoney(window.topbarPriceValue);
-  }
-  
+  if (valorPrincipal) valorPrincipal.textContent = fmtBRL(tr.preco);
+
   // Desconto e tier info
   const descontoEl = document.getElementById('resumo-desconto');
   const tierInfoEl = document.getElementById('resumo-tier-info');
-  if (window.TIERS && typeof window.currentTierIndex !== 'undefined') {
-    const tier = window.TIERS[window.currentTierIndex];
-    if (tier) {
-      if (descontoEl && tier.desconto > 0) {
-        descontoEl.textContent = `${tier.desconto}% de desconto por volume`;
-      } else if (descontoEl) {
-        descontoEl.textContent = '';
-      }
-      
-      if (tierInfoEl) {
-        const atendidos = tier.atendidos.toLocaleString('pt-BR');
-        tierInfoEl.textContent = `Plano ${tier.nome.toUpperCase()} · Até ${atendidos} atendidos/mês`;
-      }
-    }
-  }
-  
+  if (descontoEl) descontoEl.textContent = tr.desconto > 0 ? `${tr.desconto}% de desconto por volume` : '';
+  if (tierInfoEl) tierInfoEl.textContent = `${fmtNum(state.atendidos)} atendidos/mês`;
+
   // Mostrar/ocultar itens baseado nos checkboxes
   const checkVolumetria = document.getElementById('check-volumetria');
   const checkCanais = document.getElementById('check-canais');
   const checkMensagens = document.getElementById('check-mensagens');
   const checkTeto = document.getElementById('check-teto');
   const checkRoi = document.getElementById('check-roi');
-  
+
   // Volumetria
   const itemVolumetria = document.getElementById('resumo-item-volumetria');
   const contentVolumetria = document.getElementById('resumo-content-volumetria');
   if (checkVolumetria && checkVolumetria.checked) {
     itemVolumetria.classList.add('show');
-    if (window.TIERS && typeof window.currentTierIndex !== 'undefined') {
-      const tier = window.TIERS[window.currentTierIndex];
-      if (tier && contentVolumetria) {
-        const atendidos = tier.atendidos.toLocaleString('pt-BR');
-        contentVolumetria.innerHTML = `Até <span class="highlight">${atendidos}</span> atendidos por mês`;
-        if (tier.desconto > 0) {
-          contentVolumetria.innerHTML += `<br><span class="highlight">${tier.desconto}%</span> de desconto por volume`;
-        }
+    if (contentVolumetria) {
+      contentVolumetria.innerHTML = `Até <span class="highlight">${fmtNum(state.atendidos)}</span> atendidos por mês`;
+      if (tr.desconto > 0) {
+        contentVolumetria.innerHTML += `<br><span class="highlight">${tr.desconto}%</span> de desconto por volume`;
       }
     }
   } else {
     itemVolumetria.classList.remove('show');
   }
-  
+
   // Canais
   const itemCanais = document.getElementById('resumo-item-canais');
   const contentCanais = document.getElementById('resumo-content-canais');
   if (checkCanais && checkCanais.checked) {
     itemCanais.classList.add('show');
-    if (window.CANAIS && contentCanais) {
-      const canaisAtivos = window.CANAIS.filter(c => c.ativo).map(c => c.nome);
-      if (canaisAtivos.length === 0) {
-        contentCanais.innerHTML = 'Nenhum canal ativado';
-      } else {
-        contentCanais.innerHTML = canaisAtivos.map(nome => `<span class="highlight">${nome}</span>`).join(', ');
-      }
+    if (contentCanais) {
+      const canaisAtivos = CANAIS.filter(c => state.canais[c.id].ativo).map(c => c.nome);
+      contentCanais.innerHTML = canaisAtivos.length
+        ? canaisAtivos.map(nome => `<span class="highlight">${nome}</span>`).join(', ')
+        : 'Nenhum canal ativado';
     }
   } else {
     itemCanais.classList.remove('show');
   }
-  
+
   // Mensagens
   const itemMensagens = document.getElementById('resumo-item-mensagens');
   const contentMensagens = document.getElementById('resumo-content-mensagens');
   if (checkMensagens && checkMensagens.checked) {
     itemMensagens.classList.add('show');
-    if (typeof window.totalConsumo !== 'undefined' && contentMensagens) {
-      contentMensagens.innerHTML = `Total estimado: <span class="highlight">${formatMoney(window.totalConsumo)}</span>/mês`;
-      if (window.TIPOS_MENSAGEM) {
-        const detalhes = [];
-        window.TIPOS_MENSAGEM.forEach(tm => {
-          if (tm.qtd > 0) {
-            detalhes.push(`${tm.label}: ${tm.qtd.toLocaleString('pt-BR')} msg`);
-          }
-        });
-        if (detalhes.length > 0) {
-          contentMensagens.innerHTML += `<br><span style="font-size: 12px; color: var(--faint);">${detalhes.join(' · ')}</span>`;
-        }
+    if (contentMensagens) {
+      contentMensagens.innerHTML = `Total estimado: <span class="highlight">${fmtBRL(consumo)}</span>/mês`;
+      const detalhes = [];
+      const labels = { marketing: 'Marketing', utilidade: 'Utilidade', autenticacao: 'Autenticação', servico: 'Serviço' };
+      Object.keys(TARIFAS).forEach(tipo => {
+        const qtd = state.mensagens[tipo] || 0;
+        if (qtd > 0) detalhes.push(`${labels[tipo]}: ${fmtNum(qtd)} msg`);
+      });
+      if (detalhes.length > 0) {
+        contentMensagens.innerHTML += `<br><span style="font-size: 12px; color: var(--faint);">${detalhes.join(' · ')}</span>`;
       }
     }
   } else {
     itemMensagens.classList.remove('show');
   }
-  
+
   // Teto
   const itemTeto = document.getElementById('resumo-item-teto');
   const contentTeto = document.getElementById('resumo-content-teto');
   if (checkTeto && checkTeto.checked) {
     itemTeto.classList.add('show');
-    if (window.TETOS && contentTeto) {
-      if (window.currentTetoIndex === null) {
+    if (contentTeto) {
+      if (teto.valor === null) {
         contentTeto.innerHTML = 'Sem teto configurado';
-      } else if (window.TETOS[window.currentTetoIndex]) {
-        const teto = window.TETOS[window.currentTetoIndex];
-        const consumo = window.totalConsumo || 0;
+      } else {
         const percent = Math.min((consumo / teto.valor) * 100, 100).toFixed(0);
-        contentTeto.innerHTML = `Teto de <span class="highlight">${formatMoney(teto.valor)}</span> · Consumo previsto: <span class="highlight">${percent}%</span>`;
+        contentTeto.innerHTML = `Teto de <span class="highlight">${fmtBRL(teto.valor)}</span> · Consumo previsto: <span class="highlight">${percent}%</span>`;
       }
     }
   } else {
     itemTeto.classList.remove('show');
   }
-  
+
   // ROI
   const itemRoi = document.getElementById('resumo-item-roi');
   if (checkRoi && checkRoi.checked) {
     itemRoi.classList.add('show');
-    
+
     const roiInv = document.getElementById('resumo-roi-investimento');
     const roiFat = document.getElementById('resumo-roi-faturamento');
     const roiPct = document.getElementById('resumo-roi-percentual');
     const roiLuc = document.getElementById('resumo-roi-lucro');
-    
-    if (roiInv && typeof window.totalInvestimento !== 'undefined') {
-      roiInv.textContent = formatMoney(window.totalInvestimento);
+    const investimento = window.__investimentoReal || 0;
+    const receita = window.__receitaEstimada || 0;
+    const roi = window.__roiPercent || 0;
+
+    if (roiInv) roiInv.textContent = fmtBRL(investimento);
+    if (roiFat) roiFat.textContent = window.__roiValido ? fmtBRL(receita) : '—';
+    if (roiPct) {
+      roiPct.textContent = window.__roiValido ? (roi >= 0 ? '+' : '') + Math.round(roi) + '%' : '—';
+      roiPct.classList.toggle('positive', roi >= 0);
     }
-    if (roiFat && typeof window.totalFaturamento !== 'undefined') {
-      roiFat.textContent = formatMoney(window.totalFaturamento);
-    }
-    if (roiPct && typeof window.roiPercent !== 'undefined') {
-      roiPct.textContent = (window.roiPercent > 0 ? '+' : '') + window.roiPercent.toFixed(0) + '%';
-    }
-    if (roiLuc && typeof window.lucroLiquido !== 'undefined') {
-      roiLuc.textContent = formatMoney(window.lucroLiquido);
-    }
+    if (roiLuc) roiLuc.textContent = window.__roiValido ? fmtBRL(receita - investimento) : '—';
   } else {
     itemRoi.classList.remove('show');
   }
 }
-
-// Substituir a função verProposta original
-const verPropostaOriginal = window.verProposta;
-window.verProposta = function() {
-  verPropostaComResumo();
-};
 </script>
+
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
