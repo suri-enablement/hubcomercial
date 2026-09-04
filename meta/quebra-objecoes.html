@@ -120,7 +120,7 @@ main{max-width:960px;margin:0 auto;padding:56px 24px 100px;}
 .block-misconception .block-label{color:#e87070;}
 .block-script{background:var(--blue-light);border:1px dashed var(--blue-dim);}
 .block-script .block-label{color:var(--lavender);}
-.block-script p{font-style:italic;color:#e2e3ff;}
+.block-script p{font-style:italic;color:var(--white);}
 .block-strategy{background:var(--bg-card2);border:1px solid var(--line);color:var(--slate);}
 .block-strategy .block-label{color:var(--faint);}
 .block-strategy b{color:var(--white);}
@@ -135,7 +135,7 @@ main{max-width:960px;margin:0 auto;padding:56px 24px 100px;}
 .tbl{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px;}
 .tbl th{background:var(--bg-card2);color:var(--slate);font-size:9px;font-weight:700;letter-spacing:0.8px;
   text-transform:uppercase;padding:11px 14px;text-align:left;}
-.tbl td{padding:11px 14px;border-bottom:1px solid var(--line);color:#d0d3ef;vertical-align:middle;}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--white);vertical-align:middle;}
 .tbl tr:last-child td{border-bottom:none;}
 .tbl .val-blue{color:var(--lavender);font-weight:700;}
 .tbl .val-green{color:var(--green);font-weight:700;}
@@ -159,8 +159,14 @@ html.light-theme{
   --bg:#eef1f6;--bg-card:#ffffff;--bg-card2:#f4f6fa;--blue:#0e8fb5;--blue-dim:#bfe8f2;
   --blue-light:rgba(14,143,181,0.10);--lavender:#0e8fb5;--green:#059669;--green-light:rgba(5,150,105,0.10);
   --red:#dc2626;--red-light:rgba(220,38,38,0.10);--amber:#b5860f;
-  --white:#16213e;--slate:#64748b;--faint:#94a3b8;--line:#e1e5ec;
+  --white:#16213e;--slate:#475569;--faint:#94a3b8;--line:#e1e5ec;
 }
+html.light-theme .obj-q { color: #1e293b; }
+html.light-theme .block { color: #334155; }
+html.light-theme .block-strategy { color: #475569; }
+html.light-theme .block-script p { color: #1e293b; }
+
+html.light-theme .obj-label{color:#c0392b;}
 </style>
 </head>
 <body>
@@ -221,108 +227,10 @@ html.light-theme{
         <span class="obj-src">Fonte: comunidade Suri (relato de operação de locação de salas)</span>
       </div>
     </div>
-    <div class="block block-official">
-      <span class="block-label">Confirmado na comunidade</span>
-      "Infelizmente o cliente não responde tudo de uma vez" é um comportamento reconhecido — outros participantes confirmam o mesmo padrão ("às vezes nem a gente responde tudo de uma vez").
-    </div>
-    <div class="block block-strategy">
-      <span class="block-label">Estratégia relacionada</span>
-      <b>Preserve contexto.</b> O problema não é o cliente fragmentar a resposta, é o atendimento fragmentar a pergunta. Toda vez que o cliente precisa repetir algo, a operação adiciona mensagens e fricção.
-      <div class="tag-row"><span class="tag">Estratégia · Preserve contexto</span><span class="tag tag-mov">Movimento 4 · Agentes de IA</span></div>
-    </div>
-    <div class="block block-script">
-      <span class="block-label">Argumento pronto</span>
-      <p>"O ponto não é forçar o cliente a responder tudo de uma vez — é fazer sua operação lembrar o que ele já disse. Com o Commerce Agent, incluso no plano, a mesma pergunta não é repetida pelo bot, pelo vendedor e no checkout. É isso que reduz mensagem, não pedir menos coisa pro cliente."</p>
-    </div>
-  </div>
-
-  <!-- OBJEÇÃO 2 -->
-  <div class="obj-card" id="obj2">
-    <div class="obj-head">
-      <span class="obj-numbadge">2</span>
-      <div>
-        <div class="obj-label">Objeção · Susto com custo</div>
-        <div class="obj-q">"Gerei meus últimos 30 dias de mensagens e fiquei assustado — deu mais de 30 mil. Qual a média de vocês?"</div>
-        <span class="obj-src">Fonte: comunidade Suri</span>
-      </div>
-    </div>
-    <div class="block block-strategy">
-      <span class="block-label">Números para contextualizar o susto</span>
-      Cada mensagem de Serviço deve custar <b>~R$ 0,04</b> (sinalização, a confirmar em 1/09). 30 mil mensagens/mês seriam ~R$ 1.200 de custo novo — mas no plano antigo Suri, esse mesmo cliente já pagava até <b>16× o valor real da Meta</b> em Utilidade embutida. O novo modelo de margem zero tende a compensar boa parte do susto.
-    </div>
-    <div class="block block-strategy">
-      <span class="block-label">Estratégia + Movimento relacionados</span>
-      <b>Recomende, não transforme o WhatsApp em prateleira.</b> Volume alto quase sempre é sintoma de catálogo (20 produtos, 20 links, "qual você gostou?") em vez de curadoria. Mais opções não aumentam conversão — mais contexto aumenta. Some a isso o <b>teto de gasto</b> do Movimento 3, que dá previsibilidade sobre esse valor.
-      <div class="tag-row"><span class="tag">Estratégia · Recomende, não catálogo</span><span class="tag tag-mov">Movimento 3 · Teto de gasto</span><span class="tag tag-mov">Movimento 2 · Preço da Meta</span></div>
-    </div>
-    <div class="block block-script">
-      <span class="block-label">Argumento pronto</span>
-      <p>"Volume alto quase sempre é sinal de jornada repetitiva, não de operação grande demais — vale olhar o fluxo antes de olhar o preço. E diferente de hoje, você vai poder definir um teto de gasto mensal pra mensagens da Meta: ao bater o teto, os envios pausam sozinhos. Não tem mais fatura surpresa."</p>
-    </div>
-    <div class="block block-strategy">
-      <span class="block-label">Ferramenta de apoio</span>
-      Use a aba <b>"Impacto da Cobrança"</b> na Proposta Comercial para transformar esse volume em um número concreto — e o Gerador de Propostas para simular o plano com teto de gasto.
-    </div>
-  </div>
-
-  <!-- OBJEÇÃO 3 -->
-  <div class="obj-card" id="obj3">
-    <div class="obj-head">
-      <span class="obj-numbadge">3</span>
-      <div>
-        <div class="obj-label">Objeção · O que é cobrado</div>
-        <div class="obj-q">"Mesmo as interações do bot serão cobradas, correto?"</div>
-        <span class="obj-src">Fonte: comunidade Suri — respondido oficialmente por @sejasuri</span>
-      </div>
-    </div>
-    <div class="block block-official">
-      <span class="block-label">Resposta oficial da Suri (@sejasuri)</span>
-      "Isso. As mensagens do chatbot também contam como 'service message'." Ou seja, cada mensagem enviada pelo bot ao cliente entra na conta de ~R$ 0,04 (a confirmar em 1/09).
-    </div>
-    <div class="block block-strategy">
-      <span class="block-label">Estratégia + Movimento relacionados</span>
-      <b>Não use IA para responder mais — use IA para chegar mais rápido à venda.</b> Automação tradicional (pergunta → resposta → pergunta → resposta) multiplica mensagens cobráveis. O <b>Commerce Agent</b>, incluso no plano Suri Shop, faz a mesma venda com até 3× menos mensagens — reduzindo o custo de conversa em ~67% (R$ 1,60 → R$ 0,53).
-      <div class="tag-row"><span class="tag">Estratégia · IA pra vender mais rápido</span><span class="tag tag-mov">Movimento 4 · Agentes de IA inclusos</span></div>
-    </div>
-    <div class="block block-script">
-      <span class="block-label">Argumento pronto</span>
-      <p>"Sim, mensagem de bot é enviada pela empresa, então conta como as demais. Por isso o ponto não é 'ter menos bot', é ter um bot que resolve em menos trocas. O Commerce Agent já vem incluso no plano e reduz em média 3× as mensagens até o fechamento — ele paga o próprio custo."</p>
-    </div>
-  </div>
-
-  <!-- OBJEÇÃO 4 -->
-  <div class="obj-card" id="obj4">
-    <div class="obj-head">
-      <span class="obj-numbadge">4</span>
-      <div>
-        <div class="obj-label">Objeção · Mal-entendido a corrigir</div>
-        <div class="obj-q">"Pelo que estão dizendo, qualquer resposta que eu dê ao cliente é cobrada."</div>
-        <span class="obj-src">Fonte: comunidade Suri</span>
-      </div>
-    </div>
-    <div class="block block-misconception">
-      <span class="block-label">Isso é um mal-entendido — corrija com a resposta oficial</span>
-      A resposta oficial da Suri (@sejasuri) é clara: <b>"A cobrança é pelo envio da empresa → cliente. As mensagens que o cliente responde às suas não serão cobradas."</b> A mensagem do cliente para a empresa é gratuita; o que é cobrado é a empresa enviando para o cliente — hoje avulso, e a partir de 1/10 também as de Serviço.
-    </div>
-    <div class="block block-script">
-      <span class="block-label">Argumento pronto</span>
-      <p>"Isso não procede — o que o cliente te manda não é cobrado, só o que sua empresa envia pra ele. Então o foco de economia está em quantas vezes você precisa mandar mensagem, não em quantas o cliente manda. Jornada curta e sem repetição é o que faz diferença real na conta."</p>
-    </div>
-  </div>
-
-  <!-- OBJEÇÃO 5 -->
-  <div class="obj-card" id="obj5">
-    <div class="obj-head">
-      <span class="obj-numbadge">5</span>
-      <div>
-        <div class="obj-label">Objeção · Sem confirmação oficial</div>
+    
         <div class="obj-q">"Se você for pelo lado emissivo é uma coisa. E o receptivo, como fica?"</div>
         <span class="obj-src">Fonte: comunidade Suri, sem resposta oficial registrada</span>
       </div>
-    </div>
-    <div class="block block-misconception">
-      <span class="block-label">Sem confirmação oficial neste material</span>
-      Essa pergunta específica não teve resposta registrada nos materiais analisados. Não crie uma resposta definitiva sem validar — direcione para o time técnico/CS ou confirme com a documentação oficial da Meta antes de responder ao cliente.
     </div>
     <div class="block block-script">
       <span class="block-label">Argumento pronto (para não deixar sem resposta)</span>
@@ -386,8 +294,8 @@ html.light-theme{
         <span class="obj-src">Fonte: Webinar F5 · Guia de Estudo Suri Shop</span>
       </div>
     </div>
-    <div class="block block-official">
-      <span class="block-label">Resposta</span>
+    <div class="block block-strategy">
+      <span class="block-label">Estratégia relacionada</span>
       A mudança vale para <b>todas as plataformas ao mesmo tempo</b> — nenhum concorrente escapa. Enquanto o mercado ainda está explicando o problema, você já apresenta a solução.
     </div>
     <div class="block block-script">
@@ -406,8 +314,8 @@ html.light-theme{
         <span class="obj-src">Fonte: Webinar F5 · Guia de Estudo Suri Shop</span>
       </div>
     </div>
-    <div class="block block-official">
-      <span class="block-label">Resposta</span>
+    <div class="block block-strategy">
+      <span class="block-label">Estratégia + Movimento relacionados</span>
       Nenhum concorrente tem <b>teto de gasto dentro do produto</b> — só calculadoras externas. Na Suri, o cliente define o teto mensal para mensagens Meta, acompanha o consumo em tempo real e os envios pausam automaticamente ao atingir 100% do limite.
       <div class="tag-row"><span class="tag tag-mov">Movimento 3 · Teto de gasto</span></div>
     </div>
@@ -427,8 +335,8 @@ html.light-theme{
         <span class="obj-src">Fonte: Webinar F5 · Guia de Estudo Suri Shop</span>
       </div>
     </div>
-    <div class="block block-official">
-      <span class="block-label">Resposta</span>
+    <div class="block block-strategy">
+      <span class="block-label">Estratégia relacionada</span>
       A Meta está <b>bloqueando números fora da API oficial</b>. Na prática, empresas bloqueadas migram para a solução oficial — não o contrário.
     </div>
     <div class="block block-script">
@@ -447,8 +355,8 @@ html.light-theme{
         <span class="obj-src">Fonte: Webinar F5 · Guia de Estudo Suri Shop</span>
       </div>
     </div>
-    <div class="block block-official">
-      <span class="block-label">Resposta</span>
+    <div class="block block-strategy">
+      <span class="block-label">Estratégia + Movimento relacionados</span>
       É o contrário. O <b>Commerce Agent</b> faz a mesma venda com <b>3× menos mensagens</b> — R$ 1,60 vira R$ 0,53 por conversa, uma redução de ~67% no custo de mensageria. E está incluso no plano, sem custo adicional.
       <div class="tag-row"><span class="tag tag-mov">Movimento 4 · Agentes de IA inclusos</span></div>
     </div>
@@ -567,5 +475,6 @@ syncThemeToggleUI();
   }
 })();
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
