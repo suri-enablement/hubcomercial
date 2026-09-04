@@ -391,6 +391,27 @@
 
   .prop-actions { display: flex; gap: 12px; margin-top: 8px; }
 
+  /* — painel de toggles do resumo (o que aparece na tela/PDF) — */
+  .resumo-toggles {
+    background: var(--wash);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+  }
+  .resumo-toggles-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 10px;
+  }
+  .resumo-toggles-row { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+  .rt-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); cursor: pointer; user-select: none; }
+  .rt-switch { position: relative; width: 34px; height: 19px; flex-shrink: 0; }
+  .rt-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .rt-slider { position: absolute; inset: 0; background: var(--line); border-radius: 100px; transition: background .18s; }
+  .rt-slider::before { content:''; position: absolute; top: 2px; left: 2px; width: 15px; height: 15px; border-radius: 50%; background: #fff; transition: transform .18s; box-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+  .rt-switch input:checked + .rt-slider { background: var(--blue); }
+  .rt-switch input:checked + .rt-slider::before { transform: translateX(15px); }
+
   /* — rodapé em degradê verde (inspirado no slide de fechamento) — */
   .prop-footer-banner {
     margin-top: 28px;
@@ -632,6 +653,222 @@
     --green-live: #059669;
     --shadow: 0 2px 10px rgba(16,24,40,0.08);
   }
+
+  /* ══════════════════════ RESUMO INTERATIVO ══════════════════════ */
+  .resumo-section {
+    margin-bottom: 32px;
+    border: 2px solid var(--lavender);
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(160deg, rgba(182,174,252,0.12), var(--paper) 70%);
+  }
+  .resumo-header {
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .resumo-eyebrow {
+    font-size: 10px; font-weight: 800; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--lavender); margin-bottom: 8px;
+  }
+  .resumo-title {
+    font-size: 21px; font-weight: 800; color: var(--ink);
+    line-height: 1.3; margin-bottom: 6px;
+  }
+  .resumo-desc {
+    font-size: 12.5px; color: var(--ink-soft); line-height: 1.6;
+  }
+  
+  .resumo-toggles-panel {
+    padding: 20px 28px;
+    background: var(--wash);
+    border-bottom: 1px solid var(--line);
+  }
+  .resumo-toggles-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.7px;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px;
+  }
+  .resumo-toggles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .resumo-toggle-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+  }
+  .resumo-toggle-item:hover {
+    border-color: var(--blue-dim);
+    background: var(--bg-card2);
+  }
+  .resumo-toggle-item.active {
+    border-color: var(--lavender);
+    background: rgba(182,174,252,0.08);
+  }
+  
+  .resumo-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--line);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    background: var(--bg-card2);
+  }
+  .resumo-toggle-item.active .resumo-checkbox {
+    background: var(--lavender);
+    border-color: var(--lavender);
+  }
+  .resumo-checkbox-icon {
+    display: none;
+    color: var(--navy-deep);
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .resumo-toggle-item.active .resumo-checkbox-icon {
+    display: block;
+  }
+  .resumo-toggle-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  
+  .resumo-preview {
+    padding: 28px;
+  }
+  .resumo-preview-title {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--lavender);
+    margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+  }
+  .resumo-preview-icon {
+    width: 22px; height: 22px; background: var(--lavender);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: var(--navy-deep); font-size: 12px; font-weight: 800;
+  }
+  
+  .resumo-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    display: none;
+  }
+  .resumo-card.show {
+    display: block;
+    animation: fadeSlideIn 0.3s ease;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .resumo-card-title {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 10px;
+  }
+  .resumo-card-value {
+    font-size: 28px; font-weight: 800; color: var(--ink);
+    font-variant-numeric: tabular-nums; margin-bottom: 6px;
+  }
+  .resumo-card-desc {
+    font-size: 12px; color: var(--ink-soft); line-height: 1.5;
+  }
+  
+  .resumo-items {
+    display: grid;
+    gap: 12px;
+  }
+  .resumo-item {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: none;
+  }
+  .resumo-item.show {
+    display: flex;
+    animation: fadeSlideIn 0.3s ease;
+  }
+  .resumo-item-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--blue-light); border: 1px solid var(--blue-dim);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--lavender);
+    font-size: 14px; font-weight: 700;
+  }
+  .resumo-item-content {
+    flex: 1;
+  }
+  .resumo-item-title {
+    font-size: 13.5px; font-weight: 700; color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .resumo-item-value {
+    font-size: 12px; color: var(--ink-soft); line-height: 1.5;
+  }
+  .resumo-item-value b {
+    color: var(--lavender); font-weight: 700;
+  }
+  
+  .resumo-roi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .resumo-roi-card {
+    background: var(--wash);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    display: none;
+  }
+  .resumo-roi-card.show {
+    display: block;
+    animation: fadeSlideIn 0.3s ease;
+  }
+  .resumo-roi-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 8px;
+  }
+  .resumo-roi-value {
+    font-size: 20px; font-weight: 800; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .resumo-roi-value.positive {
+    color: var(--green-live);
+  }
+  .resumo-roi-value.investimento {
+    color: var(--lavender);
+  }
+  
+  @media (max-width: 720px) {
+    .resumo-toggles-grid {
+      grid-template-columns: 1fr;
+    }
+    .resumo-roi-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
 </head>
 <body data-tab="proposta">
@@ -804,7 +1041,17 @@
         <div class="prop-hero-extra" id="propExtra"></div>
       </div>
 
-      <div class="feature-table">
+      <div class="resumo-toggles no-print">
+        <div class="resumo-toggles-label">O que aparece no resumo</div>
+        <div class="resumo-toggles-row">
+          <label class="rt-item"><span class="rt-switch"><input type="checkbox" checked data-target="sectionPlano"/><span class="rt-slider"></span></span> Detalhes do plano</label>
+          <label class="rt-item"><span class="rt-switch"><input type="checkbox" checked data-target="sectionTarifas"/><span class="rt-slider"></span></span> Tarifas de mensagens</label>
+          <label class="rt-item"><span class="rt-switch"><input type="checkbox" checked data-target="sectionTotal"/><span class="rt-slider"></span></span> Investimento e ROI</label>
+          <label class="rt-item"><span class="rt-switch"><input type="checkbox" checked data-target="sectionBeneficios"/><span class="rt-slider"></span></span> Benefícios inclusos</label>
+        </div>
+      </div>
+
+      <div id="sectionPlano" class="feature-table">
         <div class="feature-row">
           <div class="feature-label">Volumetria do plano</div>
           <div class="feature-value big" id="propAtendidos2">5.000 atendidos/mês</div>
@@ -821,6 +1068,9 @@
           <div class="feature-label">Fatura prevista, no máximo</div>
           <div class="feature-value big" id="propFatura">R$ 5.850</div>
         </div>
+      </div>
+
+      <div id="sectionTarifas" class="feature-table">
         <div class="feature-row">
           <div class="feature-label">Mensagens de Marketing</div>
           <div class="feature-value">R$ 0,394 <span class="feature-sub">(era R$0,49–0,66)</span></div>
@@ -843,7 +1093,7 @@
         </div>
       </div>
 
-      <div class="total-previsto no-print-keep">
+      <div id="sectionTotal" class="total-previsto no-print-keep">
         <div class="tp-head">
           <div class="tp-eyebrow">Total previsto · Investimento e Retorno</div>
           <div class="tp-title">Quanto entra e quanto sai com esse plano?</div>
@@ -874,23 +1124,25 @@
         </div>
       </div>
 
-      <div class="benefit-section-title">Benefícios inclusos</div>
-      <div class="benefit-list">
-        <div class="benefit-item">
-          <div class="benefit-check">✓</div>
-          <div class="benefit-label">Atendentes ilimitados incluso</div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-check">✓</div>
-          <div class="benefit-label">Service Agent e Commerce Agent (IA) inclusos</div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-check">✓</div>
-          <div class="benefit-label">Webchat integrado ao WhatsApp</div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-check">✓</div>
-          <div class="benefit-label">Alerta de consumo e trava de gasto</div>
+      <div id="sectionBeneficios">
+        <div class="benefit-section-title">Benefícios inclusos</div>
+        <div class="benefit-list">
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-label">Atendentes ilimitados incluso</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-label">Service Agent e Commerce Agent (IA) inclusos</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-label">Webchat integrado ao WhatsApp</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-label">Alerta de consumo e trava de gasto</div>
+          </div>
         </div>
       </div>
 
@@ -903,7 +1155,248 @@
         </div>
       </div>
 
-      <div class="prop-actions no-print">
+      
+<!-- ══════════════════════ RESUMO INTERATIVO ══════════════════════ -->
+<div class="resumo-section" id="resumoInterativo">
+  <div class="resumo-header">
+    <div class="resumo-eyebrow">✨ APRESENTAÇÃO AO CLIENTE</div>
+    <div class="resumo-title">Resumo Executivo Interativo</div>
+    <div class="resumo-desc">Selecione os itens que você deseja mostrar na tela para o cliente durante a call. O resumo é atualizado em tempo real.</div>
+  </div>
+  
+  <div class="resumo-toggles-panel">
+    <div class="resumo-toggles-label">Selecione o que exibir no resumo:</div>
+    <div class="resumo-toggles-grid">
+      <div class="resumo-toggle-item active" onclick="toggleResumoItem('preco')" data-item="preco">
+        <div class="resumo-checkbox">
+          <span class="resumo-checkbox-icon">✓</span>
+        </div>
+        <div class="resumo-toggle-label">Preço do Plano</div>
+      </div>
+      
+      <div class="resumo-toggle-item active" onclick="toggleResumoItem('volumetria')" data-item="volumetria">
+        <div class="resumo-checkbox">
+          <span class="resumo-checkbox-icon">✓</span>
+        </div>
+        <div class="resumo-toggle-label">Volumetria</div>
+      </div>
+      
+      <div class="resumo-toggle-item active" onclick="toggleResumoItem('canais')" data-item="canais">
+        <div class="resumo-checkbox">
+          <span class="resumo-checkbox-icon">✓</span>
+        </div>
+        <div class="resumo-toggle-label">Canais Ativos</div>
+      </div>
+      
+      <div class="resumo-toggle-item active" onclick="toggleResumoItem('mensagens')" data-item="mensagens">
+        <div class="resumo-checkbox">
+          <span class="resumo-checkbox-icon">✓</span>
+        </div>
+        <div class="resumo-toggle-label">Consumo de Mensagens</div>
+      </div>
+      
+      <div class="resumo-toggle-item active" onclick="toggleResumoItem('teto')" data-item="teto">
+        <div class="resumo-checkbox">
+          <span class="resumo-checkbox-icon">✓</span>
+        </div>
+        <div class="resumo-toggle-label">Teto de Consumo</div>
+      </div>
+      
+      <div class="resumo-toggle-item active" onclick="toggleResumoItem('roi')" data-item="roi">
+        <div class="resumo-checkbox">
+          <span class="resumo-checkbox-icon">✓</span>
+        </div>
+        <div class="resumo-toggle-label">ROI Estimado</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="resumo-preview">
+    <div class="resumo-preview-title">
+      <div class="resumo-preview-icon">👁</div>
+      <span>Preview do Resumo (visão do cliente)</span>
+    </div>
+    
+    <!-- Preço -->
+    <div class="resumo-card show" id="resumo-preco" data-resumo-item="preco">
+      <div class="resumo-card-title">Investimento Mensal</div>
+      <div class="resumo-card-value" id="resumo-preco-valor">R$ 0,00</div>
+      <div class="resumo-card-desc" id="resumo-preco-desc">Plano BASE · Até 0 atendidos/mês</div>
+    </div>
+    
+    <!-- Volumetria -->
+    <div class="resumo-item show" id="resumo-volumetria" data-resumo-item="volumetria">
+      <div class="resumo-item-icon">📊</div>
+      <div class="resumo-item-content">
+        <div class="resumo-item-title">Volumetria do Plano</div>
+        <div class="resumo-item-value">
+          Até <b id="resumo-volumetria-valor">0</b> atendidos por mês
+        </div>
+      </div>
+    </div>
+    
+    <!-- Canais -->
+    <div class="resumo-item show" id="resumo-canais" data-resumo-item="canais">
+      <div class="resumo-item-icon">💬</div>
+      <div class="resumo-item-content">
+        <div class="resumo-item-title">Canais Ativados</div>
+        <div class="resumo-item-value" id="resumo-canais-lista">
+          Nenhum canal ativado
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mensagens -->
+    <div class="resumo-item show" id="resumo-mensagens" data-resumo-item="mensagens">
+      <div class="resumo-item-icon">📨</div>
+      <div class="resumo-item-content">
+        <div class="resumo-item-title">Consumo Previsto de Mensagens</div>
+        <div class="resumo-item-value">
+          Total estimado: <b id="resumo-mensagens-total">R$ 0,00</b>/mês
+          <div style="font-size: 11px; color: var(--ink-faint); margin-top: 4px;" id="resumo-mensagens-detalhes">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Teto -->
+    <div class="resumo-item show" id="resumo-teto" data-resumo-item="teto">
+      <div class="resumo-item-icon">🎯</div>
+      <div class="resumo-item-content">
+        <div class="resumo-item-title">Teto de Consumo Configurado</div>
+        <div class="resumo-item-value" id="resumo-teto-valor">
+          Sem teto configurado
+        </div>
+      </div>
+    </div>
+    
+    <!-- ROI -->
+    <div class="resumo-card show" id="resumo-roi" data-resumo-item="roi" style="background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.25);">
+      <div class="resumo-card-title" style="color: var(--green-live);">💰 Retorno sobre Investimento (ROI)</div>
+      <div class="resumo-roi-grid">
+        <div class="resumo-roi-card show">
+          <div class="resumo-roi-label">Investimento</div>
+          <div class="resumo-roi-value investimento" id="resumo-roi-investimento">R$ 0,00</div>
+        </div>
+        <div class="resumo-roi-card show">
+          <div class="resumo-roi-label">Faturamento Gerado</div>
+          <div class="resumo-roi-value" id="resumo-roi-faturamento">R$ 0,00</div>
+        </div>
+        <div class="resumo-roi-card show">
+          <div class="resumo-roi-label">ROI</div>
+          <div class="resumo-roi-value positive" id="resumo-roi-percentual">0%</div>
+        </div>
+      </div>
+      <div class="resumo-card-desc" style="margin-top: 12px; text-align: center;">
+        Lucro líquido estimado: <b style="color: var(--green-live);" id="resumo-roi-lucro">R$ 0,00</b>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+// Função para toggle dos itens do resumo
+function toggleResumoItem(itemId) {
+  const toggleElement = document.querySelector(`[data-item="${itemId}"]`);
+  const resumoElement = document.getElementById(`resumo-${itemId}`);
+  
+  if (!toggleElement || !resumoElement) return;
+  
+  // Toggle do estado ativo
+  toggleElement.classList.toggle('active');
+  
+  // Mostrar/ocultar no preview
+  if (toggleElement.classList.contains('active')) {
+    resumoElement.classList.add('show');
+  } else {
+    resumoElement.classList.remove('show');
+  }
+}
+
+// Atualizar o resumo interativo quando a proposta for gerada
+function atualizarResumoInterativo() {
+  // Preço do plano
+  const precoValor = document.getElementById('resumo-preco-valor');
+  const precoDesc = document.getElementById('resumo-preco-desc');
+  if (precoValor && topbarPriceEl) {
+    precoValor.textContent = topbarPriceEl.textContent;
+  }
+  if (precoDesc) {
+    const tier = TIERS[currentTierIndex];
+    const atendidos = tier.atendidos.toLocaleString('pt-BR');
+    precoDesc.textContent = `Plano ${tier.nome.toUpperCase()} · Até ${atendidos} atendidos/mês`;
+  }
+  
+  // Volumetria
+  const volumetriaValor = document.getElementById('resumo-volumetria-valor');
+  if (volumetriaValor) {
+    const tier = TIERS[currentTierIndex];
+    volumetriaValor.textContent = tier.atendidos.toLocaleString('pt-BR');
+  }
+  
+  // Canais ativos
+  const canaisLista = document.getElementById('resumo-canais-lista');
+  if (canaisLista) {
+    const canaisAtivos = CANAIS.filter(c => c.ativo).map(c => c.nome);
+    if (canaisAtivos.length === 0) {
+      canaisLista.innerHTML = 'Nenhum canal ativado';
+    } else {
+      canaisLista.innerHTML = canaisAtivos.map(nome => `<b>${nome}</b>`).join(', ');
+    }
+  }
+  
+  // Mensagens
+  const mensagensTotal = document.getElementById('resumo-mensagens-total');
+  const mensagensDetalhes = document.getElementById('resumo-mensagens-detalhes');
+  if (mensagensTotal) {
+    mensagensTotal.textContent = formatMoney(totalConsumo);
+  }
+  if (mensagensDetalhes) {
+    const detalhes = [];
+    TIPOS_MENSAGEM.forEach(tm => {
+      if (tm.qtd > 0) {
+        detalhes.push(`${tm.label}: ${tm.qtd.toLocaleString('pt-BR')} msg`);
+      }
+    });
+    mensagensDetalhes.textContent = detalhes.length > 0 ? detalhes.join(' · ') : 'Nenhuma mensagem estimada';
+  }
+  
+  // Teto
+  const tetoValor = document.getElementById('resumo-teto-valor');
+  if (tetoValor) {
+    if (currentTetoIndex === null) {
+      tetoValor.innerHTML = 'Sem teto configurado';
+    } else {
+      const teto = TETOS[currentTetoIndex];
+      const percent = Math.min((totalConsumo / teto.valor) * 100, 100).toFixed(0);
+      tetoValor.innerHTML = `Teto de <b>${formatMoney(teto.valor)}</b> · Consumo previsto: <b>${percent}%</b>`;
+    }
+  }
+  
+  // ROI
+  const roiInvestimento = document.getElementById('resumo-roi-investimento');
+  const roiFaturamento = document.getElementById('resumo-roi-faturamento');
+  const roiPercentual = document.getElementById('resumo-roi-percentual');
+  const roiLucro = document.getElementById('resumo-roi-lucro');
+  
+  if (roiInvestimento) roiInvestimento.textContent = formatMoney(totalInvestimento);
+  if (roiFaturamento) roiFaturamento.textContent = formatMoney(totalFaturamento);
+  if (roiPercentual) roiPercentual.textContent = (roiPercent > 0 ? '+' : '') + roiPercent.toFixed(0) + '%';
+  if (roiLucro) roiLucro.textContent = formatMoney(lucroLiquido);
+}
+
+// Chamar atualização quando a proposta for exibida
+const verPropostaOriginal = window.verProposta;
+window.verProposta = function() {
+  if (verPropostaOriginal) {
+    verPropostaOriginal();
+  }
+  setTimeout(atualizarResumoInterativo, 100);
+};
+</script>
+
+<div class="prop-actions no-print">
         <button class="btn-ghost" onclick="editarProposta()">← Editar</button>
         <button class="btn-primary" onclick="window.print()">Gerar PDF</button>
       </div>
@@ -1133,6 +1626,14 @@
 function syncThemeToggleUI() { const t=document.getElementById('themeToggleThumb'); if(t) t.textContent = document.documentElement.classList.contains('light-theme') ? '☀️' : '🌙'; }
 function toggleHubTheme() { const n = document.documentElement.classList.contains('light-theme') ? 'dark' : 'light'; document.documentElement.classList.toggle('light-theme', n==='light'); localStorage.setItem('suri_hub_theme', n); syncThemeToggleUI(); }
 syncThemeToggleUI();
+
+// ── Toggles do resumo: mostra/esconde seções em tempo real ──
+document.querySelectorAll('.resumo-toggles input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const target = document.getElementById(cb.dataset.target);
+    if (target) target.style.display = cb.checked ? '' : 'none';
+  });
+});
 
 // ─────────────────────────────────────────────
 // AUTENTICAÇÃO
@@ -1595,5 +2096,6 @@ renderImpacto();
 renderRoi();
 renderAll();
 </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
