@@ -666,34 +666,57 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: var(--bg-page);
+    background: rgba(8,11,30,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 500;
     overflow-y: auto;
-    padding: 40px 20px;
+    padding: 48px 20px;
+  }
+  html.light-theme .tela-resumo {
+    background: rgba(20,26,50,0.45);
   }
   .tela-resumo.show {
-    display: block;
+    display: flex;
+    justify-content: center;
+  }
+
+  @keyframes resumoPop {
+    from { opacity: 0; transform: translateY(28px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   .resumo-container {
     max-width: 720px;
+    width: 100%;
+    height: fit-content;
     margin: 0 auto;
     background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 56px 64px;
-    box-shadow: var(--shadow);
+    border-radius: 28px;
+    padding: 48px 52px;
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+    position: relative;
+    overflow: hidden;
+    animation: resumoPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .resumo-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--blue), var(--lavender));
   }
 
   .resumo-header {
     text-align: center;
-    margin-bottom: 36px;
-    padding-bottom: 28px;
-    border-bottom: 2px solid var(--ink);
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
   }
 
   .resumo-logo {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
   .resumo-logo img {
     height: 26px;
@@ -791,7 +814,7 @@
   }
   .resumo-block {
     background: var(--wash);
-    border-radius: 12px;
+    border-radius: 18px;
     padding: 20px 22px;
     margin-bottom: 16px;
   }
@@ -817,13 +840,21 @@
     color: var(--ink-soft);
     font-weight: 600;
   }
+  .resumo-row-ref {
+    font-weight: 600;
+  }
+  .resumo-row-ref-note {
+    color: var(--ink-faint);
+    font-weight: 400;
+    font-size: 11.5px;
+  }
   .resumo-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 12px;
-    padding: 14px 18px;
-    border-radius: 10px;
+    padding: 14px 20px;
+    border-radius: 16px;
     font-weight: 700;
     font-size: 13px;
   }
@@ -839,10 +870,11 @@
     font-size: 18px;
   }
   .resumo-total-bar {
-    background: var(--ink);
-    border-radius: 12px;
-    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--ink) 0%, #1c2560 100%);
+    border-radius: 18px;
+    padding: 18px 22px;
     margin-bottom: 24px;
+    box-shadow: 0 12px 28px -10px rgba(20,25,60,0.5);
   }
   .resumo-total-row {
     display: flex;
@@ -2075,6 +2107,7 @@ renderAll();
         <div class="resumo-row"><span class="resumo-row-label">Plano</span><span class="resumo-row-value" id="inv-plano-atendidos">—</span></div>
         <div class="resumo-row"><span class="resumo-row-label">Mensalidade do plano</span><span class="resumo-row-value" id="inv-plano-mensal">R$ 0,00</span></div>
         <div class="resumo-row"><span class="resumo-row-label">Clientes excedentes</span><span class="resumo-row-value" id="inv-plano-excedentes">R$ 0,00</span></div>
+        <div class="resumo-row"><span class="resumo-row-label">Cliente atendido excedente</span><span class="resumo-row-value resumo-row-ref">R$ 1,50 <span class="resumo-row-ref-note">por cliente acima do plano</span></span></div>
         <div class="resumo-row"><span class="resumo-row-label">Imposto</span><span class="resumo-row-value">Já incluso no valor</span></div>
         <div class="resumo-bar resumo-bar-blue"><span>Valor do Plano</span><span class="resumo-bar-value" id="inv-plano-total">R$ 0,00</span></div>
       </div>
