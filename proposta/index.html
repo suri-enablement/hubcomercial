@@ -782,6 +782,87 @@
     border-bottom: 1px solid var(--line);
   }
 
+  .resumo-invoice {
+    display: none;
+    margin-bottom: 20px;
+  }
+  .resumo-invoice.show {
+    display: block;
+  }
+  .resumo-block {
+    background: var(--wash);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .resumo-block:last-child {
+    margin-bottom: 0;
+  }
+  .resumo-block-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .resumo-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 12.5px;
+  }
+  .resumo-row-label {
+    color: var(--ink-faint);
+  }
+  .resumo-row-value {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .resumo-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .resumo-bar-blue {
+    background: rgba(88,80,236,0.12);
+    color: var(--lavender);
+  }
+  .resumo-bar-green {
+    background: rgba(5,150,105,0.12);
+    color: var(--green-live);
+  }
+  .resumo-bar-value {
+    font-size: 18px;
+  }
+  .resumo-total-bar {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .resumo-total-row {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 8px 0;
+  }
+  .resumo-total-row-sub {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+  }
+  .resumo-total-row-sub span:last-child {
+    font-weight: 700;
+    color: #fff;
+  }
+
   .resumo-items {
     display: grid;
     gap: 20px;
@@ -1077,6 +1158,37 @@
     </div>
 
     
+  <div class="step-card" style="margin-top: 32px;">
+    <div class="step-eyebrow">RETORNO</div>
+    <div class="step-title">Quanto entra e quanto sai com esse plano?</div>
+    <div class="step-desc">Estime o ticket médio e a conversão pra calcular o retorno esperado — esses números aparecem no resumo, na aba de ROI.</div>
+
+    <div class="tp-grid">
+      <div class="tp-field">
+        <label>Ticket médio por venda</label>
+        <input type="number" min="0" step="1" placeholder="R$ 0" id="tpTicket"/>
+      </div>
+      <div class="tp-field">
+        <label>Taxa de conversão estimada (%)</label>
+        <input type="number" min="0" max="100" step="1" placeholder="0" id="tpConversao"/>
+      </div>
+    </div>
+    <div class="tp-results">
+      <div class="tp-result">
+        <div class="tp-result-label">Investimento mensal previsto</div>
+        <div class="tp-result-value investimento" id="tpInvestimento">R$ 5.850</div>
+      </div>
+      <div class="tp-result">
+        <div class="tp-result-label">Retorno estimado (receita)</div>
+        <div class="tp-result-value" id="tpRetorno">R$ 0</div>
+      </div>
+      <div class="tp-result">
+        <div class="tp-result-label">ROI previsto</div>
+        <div class="tp-result-value positive" id="tpRoi">—</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════════════════ CHECKBOXES - O QUE APARECE NO RESUMO ══════════════════════ -->
   <div class="step-card" style="margin-top: 32px;">
     <div class="step-eyebrow">RESUMO</div>
@@ -1192,37 +1304,6 @@
         <div class="feature-row">
           <div class="feature-label">Valor de implantação <span class="feature-sub">(cobrança única)</span></div>
           <div class="feature-value big">R$ 1.980,00</div>
-        </div>
-      </div>
-
-      <div id="sectionTotal" class="total-previsto no-print-keep">
-        <div class="tp-head">
-          <div class="tp-eyebrow">Total previsto · Investimento e Retorno</div>
-          <div class="tp-title">Quanto entra e quanto sai com esse plano?</div>
-        </div>
-        <div class="tp-grid">
-          <div class="tp-field">
-            <label>Ticket médio por venda</label>
-            <input type="number" min="0" step="1" placeholder="R$ 0" id="tpTicket"/>
-          </div>
-          <div class="tp-field">
-            <label>Taxa de conversão estimada (%)</label>
-            <input type="number" min="0" max="100" step="1" placeholder="0" id="tpConversao"/>
-          </div>
-        </div>
-        <div class="tp-results">
-          <div class="tp-result">
-            <div class="tp-result-label">Investimento mensal previsto</div>
-            <div class="tp-result-value investimento" id="tpInvestimento">R$ 5.850</div>
-          </div>
-          <div class="tp-result">
-            <div class="tp-result-label">Retorno estimado (receita)</div>
-            <div class="tp-result-value" id="tpRetorno">R$ 0</div>
-          </div>
-          <div class="tp-result">
-            <div class="tp-result-label">ROI previsto</div>
-            <div class="tp-result-value positive" id="tpRoi">—</div>
-          </div>
         </div>
       </div>
 
@@ -1986,25 +2067,44 @@ renderAll();
       <div class="resumo-valor-principal" id="resumo-valor-principal">R$ 0,00</div>
       <div class="resumo-desconto" id="resumo-desconto"></div>
       <div class="resumo-tier-info" id="resumo-tier-info"></div>
-      <div class="resumo-implantacao">
-        Valor de implantação: <strong id="resumo-implantacao">R$ 1.980,00</strong> <span class="resumo-implantacao-sub">(cobrança única)</span>
+    </div>
+
+    <div class="resumo-invoice" id="resumo-item-volumetria">
+      <div class="resumo-block">
+        <div class="resumo-block-title">Valor do Plano (Suri)</div>
+        <div class="resumo-row"><span class="resumo-row-label">Plano</span><span class="resumo-row-value" id="inv-plano-atendidos">—</span></div>
+        <div class="resumo-row"><span class="resumo-row-label">Mensalidade do plano</span><span class="resumo-row-value" id="inv-plano-mensal">R$ 0,00</span></div>
+        <div class="resumo-row"><span class="resumo-row-label">Clientes excedentes</span><span class="resumo-row-value" id="inv-plano-excedentes">R$ 0,00</span></div>
+        <div class="resumo-row"><span class="resumo-row-label">Imposto</span><span class="resumo-row-value">Já incluso no valor</span></div>
+        <div class="resumo-bar resumo-bar-blue"><span>Valor do Plano</span><span class="resumo-bar-value" id="inv-plano-total">R$ 0,00</span></div>
+      </div>
+
+      <div class="resumo-block">
+        <div class="resumo-block-title">Implantação — cobrança única</div>
+        <div class="resumo-row"><span class="resumo-row-label">Valor da implantação</span><span class="resumo-row-value">R$ 1.980,00</span></div>
+        <div class="resumo-row"><span class="resumo-row-label">Imposto</span><span class="resumo-row-value">Já incluso no valor</span></div>
+        <div class="resumo-bar resumo-bar-blue"><span>Valor da implantação</span><span class="resumo-bar-value">R$ 1.980,00</span></div>
       </div>
     </div>
 
-    <div class="resumo-items">
-      <div class="resumo-item" id="resumo-item-volumetria">
-        <div class="resumo-item-title">Volumetria do Plano</div>
-        <div class="resumo-item-content" id="resumo-content-volumetria"></div>
+    <div class="resumo-invoice" id="resumo-item-mensagens">
+      <div class="resumo-block">
+        <div class="resumo-block-title">Estimativa de Custo com a Meta</div>
+        <div class="resumo-row" id="inv-meta-detalhe" style="display:none;"><span class="resumo-row-label">Consumo estimado</span><span class="resumo-row-value" id="inv-meta-consumo-detalhe"></span></div>
+        <div class="resumo-row"><span class="resumo-row-label">Imposto</span><span class="resumo-row-value">Já incluso no valor</span></div>
+        <div class="resumo-bar resumo-bar-green"><span>Estimativa de Custo com a Meta</span><span class="resumo-bar-value" id="inv-meta-total">R$ 0,00</span></div>
       </div>
+    </div>
 
+    <div class="resumo-total-bar">
+      <div class="resumo-total-row"><span>Valor do Plano + Estimativa de Custo com a Meta</span><span id="inv-total-atual">R$ 0,00</span></div>
+      <div class="resumo-total-row resumo-total-row-sub"><span>Valor do Plano + Estimativa de Custo com a Meta a partir de 01/10/2026</span><span id="inv-total-futuro">R$ 0,00</span></div>
+    </div>
+
+    <div class="resumo-items">
       <div class="resumo-item" id="resumo-item-canais">
         <div class="resumo-item-title">Canais Ativos</div>
         <div class="resumo-item-content" id="resumo-content-canais"></div>
-      </div>
-
-      <div class="resumo-item" id="resumo-item-mensagens">
-        <div class="resumo-item-title">Consumo de Mensagens</div>
-        <div class="resumo-item-content" id="resumo-content-mensagens"></div>
       </div>
 
       <div class="resumo-item" id="resumo-item-teto">
@@ -2053,6 +2153,7 @@ renderAll();
   </div>
 </div>
 
+
 <script>
 // Função para voltar à configuração
 function voltarConfig() {
@@ -2083,17 +2184,15 @@ function atualizarTelaResumo() {
   const checkTeto = document.getElementById('check-teto');
   const checkRoi = document.getElementById('check-roi');
 
-  // Volumetria
+  // Volumetria → bloco "Valor do Plano" + "Implantação" (estilo fatura)
   const itemVolumetria = document.getElementById('resumo-item-volumetria');
-  const contentVolumetria = document.getElementById('resumo-content-volumetria');
   if (checkVolumetria && checkVolumetria.checked) {
     itemVolumetria.classList.add('show');
-    if (contentVolumetria) {
-      contentVolumetria.innerHTML = `Até <span class="highlight">${fmtNum(state.atendidos)}</span> atendidos por mês`;
-      if (tr.desconto > 0) {
-        contentVolumetria.innerHTML += `<br><span class="highlight">${tr.desconto}%</span> de desconto por volume`;
-      }
-    }
+    const setText = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+    setText('inv-plano-atendidos', `${fmtNum(state.atendidos)} atendidos/mês`);
+    setText('inv-plano-mensal', fmtBRL(tr.preco));
+    setText('inv-plano-excedentes', fmtBRL(0));
+    setText('inv-plano-total', fmtBRL(tr.preco));
   } else {
     itemVolumetria.classList.remove('show');
   }
@@ -2113,26 +2212,37 @@ function atualizarTelaResumo() {
     itemCanais.classList.remove('show');
   }
 
-  // Mensagens
+  // Mensagens → bloco "Estimativa de Custo com a Meta" (estilo fatura)
   const itemMensagens = document.getElementById('resumo-item-mensagens');
-  const contentMensagens = document.getElementById('resumo-content-mensagens');
   if (checkMensagens && checkMensagens.checked) {
     itemMensagens.classList.add('show');
-    if (contentMensagens) {
-      contentMensagens.innerHTML = `Total estimado: <span class="highlight">${fmtBRL(consumo)}</span>/mês`;
-      const detalhes = [];
-      const labels = { marketing: 'Marketing', utilidade: 'Utilidade', autenticacao: 'Autenticação', servico: 'Serviço' };
-      Object.keys(TARIFAS).forEach(tipo => {
-        const qtd = state.mensagens[tipo] || 0;
-        if (qtd > 0) detalhes.push(`${labels[tipo]}: ${fmtNum(qtd)} msg`);
-      });
-      if (detalhes.length > 0) {
-        contentMensagens.innerHTML += `<br><span style="font-size: 12px; color: var(--faint);">${detalhes.join(' · ')}</span>`;
-      }
+    const detalheEl = document.getElementById('inv-meta-detalhe');
+    const detalheTxt = document.getElementById('inv-meta-consumo-detalhe');
+    const labels = { marketing: 'Marketing', utilidade: 'Utilidade', autenticacao: 'Autenticação', servico: 'Serviço' };
+    const detalhes = [];
+    Object.keys(TARIFAS).forEach(tipo => {
+      const qtd = state.mensagens[tipo] || 0;
+      if (qtd > 0) detalhes.push(`${labels[tipo]}: ${fmtNum(qtd)} msg`);
+    });
+    if (detalhes.length > 0 && detalheEl && detalheTxt) {
+      detalheEl.style.display = 'flex';
+      detalheTxt.textContent = detalhes.join(' · ');
+    } else if (detalheEl) {
+      detalheEl.style.display = 'none';
     }
+    const metaTotalEl = document.getElementById('inv-meta-total');
+    if (metaTotalEl) metaTotalEl.textContent = fmtBRL(consumo);
   } else {
     itemMensagens.classList.remove('show');
   }
+
+  // Barra de total (Plano + Meta) — só soma o que estiver marcado pra aparecer
+  const totalAtual = (checkVolumetria && checkVolumetria.checked ? tr.preco : 0) +
+                      (checkMensagens && checkMensagens.checked ? consumo : 0);
+  const totalAtualEl = document.getElementById('inv-total-atual');
+  const totalFuturoEl = document.getElementById('inv-total-futuro');
+  if (totalAtualEl) totalAtualEl.textContent = fmtBRL(totalAtual);
+  if (totalFuturoEl) totalFuturoEl.textContent = fmtBRL(totalAtual);
 
   // Teto
   const itemTeto = document.getElementById('resumo-item-teto');
