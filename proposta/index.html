@@ -58,7 +58,7 @@
 
   /* ══════════════════════ SCREEN 1 — CONFIGURADOR ══════════════════════ */
   #screenConfig { display: block; }
-  body.show-proposal #screenConfig { display: none; }
+  body.show-proposal #screenConfig { display: block; }
 
   .config-wrap { max-width: 900px; margin: 0 auto; padding: 56px 32px 60px; }
 
@@ -767,10 +767,7 @@
     margin-bottom: 14px;
     display: none;
   }
-  .resumo-card.show {
-    display: block;
-    animation: fadeSlideIn 0.3s ease;
-  }
+  .resumo-card { display: block; animation: fadeSlideIn 0.3s ease; }
   @keyframes fadeSlideIn {
     from { opacity: 0; transform: translateY(-8px); }
     to { opacity: 1; transform: translateY(0); }
@@ -802,10 +799,7 @@
     border-radius: 12px;
     display: none;
   }
-  .resumo-item.show {
-    display: flex;
-    animation: fadeSlideIn 0.3s ease;
-  }
+  .resumo-item { display: flex; animation: fadeSlideIn 0.3s ease; }
   .resumo-item-icon {
     width: 28px; height: 28px; border-radius: 8px;
     background: var(--blue-light); border: 1px solid var(--blue-dim);
@@ -1051,10 +1045,7 @@
     margin-bottom: 16px;
     display: none;
   }
-  .resumo-card.show {
-    display: block;
-    animation: fadeSlideIn 0.3s ease;
-  }
+  .resumo-card { display: block; animation: fadeSlideIn 0.3s ease; }
   
   @keyframes fadeSlideIn {
     from { opacity: 0; transform: translateY(-10px); }
@@ -1103,10 +1094,7 @@
     border-radius: 16px;
     display: none;
   }
-  .resumo-item.show {
-    display: flex;
-    animation: fadeSlideIn 0.3s ease;
-  }
+  .resumo-item { display: flex; animation: fadeSlideIn 0.3s ease; }
   
   .resumo-item-icon {
     width: 32px;
@@ -1148,10 +1136,7 @@
     margin-top: 16px;
     display: none;
   }
-  .resumo-roi-section.show {
-    display: block;
-    animation: fadeSlideIn 0.3s ease;
-  }
+  .resumo-roi-section { display: block; animation: fadeSlideIn 0.3s ease; }
   
   .resumo-roi-title {
     font-size: 11px;
@@ -2223,15 +2208,7 @@ renderAll();
       <button class="modal-resumo-close" onclick="fecharResumo()">✕</button>
     </div>
     
-    <div class="modal-resumo-toggles">
-      <div class="modal-resumo-toggles-label">⚙️ Configure o que exibir no resumo:</div>
-      <div class="modal-resumo-toggles-grid">
-        <div class="modal-resumo-toggle-item active" onclick="toggleResumoItem('preco')" data-item="preco">
-          <div class="modal-resumo-checkbox">
-            <span class="modal-resumo-checkbox-icon">✓</span>
-          </div>
-          <div class="modal-resumo-toggle-label">Preço do Plano</div>
-        </div>
+    
         
         <div class="modal-resumo-toggle-item active" onclick="toggleResumoItem('volumetria')" data-item="volumetria">
           <div class="modal-resumo-checkbox">
@@ -2277,7 +2254,7 @@ renderAll();
       </div>
       
       <!-- Preço do Plano -->
-      <div class="resumo-card show" id="resumo-preco" data-resumo-item="preco">
+      <div class="resumo-card show" id="resumo-preco">
         <div class="resumo-card-title">Plano Proposto</div>
         <div class="resumo-card-value" id="resumo-preco-valor">R$ 0,00</div>
         <div class="resumo-card-desc" id="resumo-preco-desc">
@@ -2287,7 +2264,7 @@ renderAll();
       
       <div class="resumo-items-grid">
         <!-- Volumetria & Desconto -->
-        <div class="resumo-item show" id="resumo-volumetria" data-resumo-item="volumetria">
+        <div class="resumo-item show" id="resumo-volumetria">
           <div class="resumo-item-icon">📊</div>
           <div class="resumo-item-content">
             <div class="resumo-item-title">Volumetria do Plano</div>
@@ -2299,7 +2276,7 @@ renderAll();
         </div>
         
         <!-- Canais Ativos -->
-        <div class="resumo-item show" id="resumo-canais" data-resumo-item="canais">
+        <div class="resumo-item show" id="resumo-canais">
           <div class="resumo-item-icon">💬</div>
           <div class="resumo-item-content">
             <div class="resumo-item-title">Canais Ativos</div>
@@ -2310,7 +2287,7 @@ renderAll();
         </div>
         
         <!-- Consumo de Mensagens -->
-        <div class="resumo-item show" id="resumo-mensagens" data-resumo-item="mensagens">
+        <div class="resumo-item show" id="resumo-mensagens">
           <div class="resumo-item-icon">📨</div>
           <div class="resumo-item-content">
             <div class="resumo-item-title">Consumo Previsto</div>
@@ -2322,7 +2299,7 @@ renderAll();
         </div>
         
         <!-- Teto de Consumo -->
-        <div class="resumo-item show" id="resumo-teto" data-resumo-item="teto">
+        <div class="resumo-item show" id="resumo-teto">
           <div class="resumo-item-icon">🎯</div>
           <div class="resumo-item-content">
             <div class="resumo-item-title">Teto de Consumo</div>
@@ -2334,7 +2311,7 @@ renderAll();
       </div>
       
       <!-- ROI & Retorno -->
-      <div class="resumo-roi-section show" id="resumo-roi" data-resumo-item="roi">
+      <div class="resumo-roi-section show" id="resumo-roi">
         <div class="resumo-roi-title">💰 Retorno sobre Investimento (ROI)</div>
         <div class="resumo-roi-grid">
           <div class="resumo-roi-card">
@@ -2372,9 +2349,7 @@ function fecharResumo() {
   document.body.style.overflow = '';
 }
 
-function toggleResumoItem(itemId) {
-  const toggleElement = document.querySelector(`[data-item="${itemId}"]`);
-  const resumoElement = document.getElementById(`resumo-${itemId}`);
+`);
   
   if (!toggleElement || !resumoElement) return;
   
@@ -2387,70 +2362,95 @@ function toggleResumoItem(itemId) {
   }
 }
 
+
 function atualizarResumoInterativo() {
+  console.log('Atualizando resumo...');
+  
+  // Debug: verificar se as variáveis existem
+  console.log('topbarPriceValue:', window.topbarPriceValue);
+  console.log('TIERS:', window.TIERS);
+  console.log('currentTierIndex:', window.currentTierIndex);
+  
   // Preço do plano
   const precoValor = document.getElementById('resumo-preco-valor');
   const precoDesc = document.getElementById('resumo-preco-desc');
-  if (precoValor && typeof topbarPriceValue !== 'undefined') {
-    precoValor.textContent = formatMoney(topbarPriceValue);
+  
+  if (precoValor) {
+    const preco = window.topbarPriceValue || 0;
+    precoValor.textContent = formatMoney(preco);
+    console.log('Preço atualizado:', preco);
   }
-  if (precoDesc && typeof TIERS !== 'undefined' && typeof currentTierIndex !== 'undefined') {
-    const tier = TIERS[currentTierIndex];
-    const atendidos = tier.atendidos.toLocaleString('pt-BR');
-    const desconto = tier.desconto;
-    precoDesc.innerHTML = `Plano <span class="highlight">${tier.nome.toUpperCase()}</span> · Até <span class="highlight">${atendidos}</span> atendidos/mês`;
+  
+  if (precoDesc && window.TIERS && typeof window.currentTierIndex !== 'undefined') {
+    const tier = window.TIERS[window.currentTierIndex];
+    if (tier) {
+      const atendidos = tier.atendidos.toLocaleString('pt-BR');
+      precoDesc.innerHTML = `Plano <span class="highlight">${tier.nome.toUpperCase()}</span> · Até <span class="highlight">${atendidos}</span> atendidos/mês`;
+      console.log('Descrição atualizada:', tier);
+    }
   }
   
   // Volumetria com desconto
   const volumetriaValor = document.getElementById('resumo-volumetria-valor');
   const descontoInfo = document.getElementById('resumo-desconto-info');
-  if (volumetriaValor && typeof TIERS !== 'undefined' && typeof currentTierIndex !== 'undefined') {
-    const tier = TIERS[currentTierIndex];
-    volumetriaValor.textContent = tier.atendidos.toLocaleString('pt-BR');
-    
-    if (descontoInfo && tier.desconto > 0) {
-      descontoInfo.innerHTML = `<span class="highlight">${tier.desconto}% de desconto</span> por volume`;
-    } else if (descontoInfo) {
-      descontoInfo.innerHTML = '';
+  
+  if (volumetriaValor && window.TIERS && typeof window.currentTierIndex !== 'undefined') {
+    const tier = window.TIERS[window.currentTierIndex];
+    if (tier) {
+      volumetriaValor.textContent = tier.atendidos.toLocaleString('pt-BR');
+      
+      if (descontoInfo && tier.desconto > 0) {
+        descontoInfo.innerHTML = `<span class="highlight">${tier.desconto}% de desconto</span> por volume`;
+      } else if (descontoInfo) {
+        descontoInfo.innerHTML = '';
+      }
+      console.log('Volumetria atualizada:', tier.atendidos, 'desconto:', tier.desconto);
     }
   }
   
   // Canais ativos
   const canaisLista = document.getElementById('resumo-canais-lista');
-  if (canaisLista && typeof CANAIS !== 'undefined') {
-    const canaisAtivos = CANAIS.filter(c => c.ativo).map(c => c.nome);
+  if (canaisLista && window.CANAIS) {
+    const canaisAtivos = window.CANAIS.filter(c => c.ativo).map(c => c.nome);
     if (canaisAtivos.length === 0) {
       canaisLista.innerHTML = 'Nenhum canal ativado';
     } else {
       canaisLista.innerHTML = canaisAtivos.map(nome => `<span class="highlight">${nome}</span>`).join(', ');
     }
+    console.log('Canais ativos:', canaisAtivos);
   }
   
   // Mensagens
   const mensagensTotal = document.getElementById('resumo-mensagens-total');
   const mensagensDetalhes = document.getElementById('resumo-mensagens-detalhes');
-  if (mensagensTotal && typeof totalConsumo !== 'undefined') {
-    mensagensTotal.textContent = formatMoney(totalConsumo);
+  
+  if (mensagensTotal && typeof window.totalConsumo !== 'undefined') {
+    mensagensTotal.textContent = formatMoney(window.totalConsumo);
+    console.log('Total consumo:', window.totalConsumo);
   }
-  if (mensagensDetalhes && typeof TIPOS_MENSAGEM !== 'undefined') {
+  
+  if (mensagensDetalhes && window.TIPOS_MENSAGEM) {
     const detalhes = [];
-    TIPOS_MENSAGEM.forEach(tm => {
+    window.TIPOS_MENSAGEM.forEach(tm => {
       if (tm.qtd > 0) {
         detalhes.push(`${tm.label}: ${tm.qtd.toLocaleString('pt-BR')} msg`);
       }
     });
     mensagensDetalhes.innerHTML = detalhes.length > 0 ? detalhes.join(' · ') : 'Nenhuma mensagem estimada';
+    console.log('Detalhes mensagens:', detalhes);
   }
   
   // Teto
   const tetoValor = document.getElementById('resumo-teto-valor');
-  if (tetoValor && typeof TETOS !== 'undefined' && typeof currentTetoIndex !== 'undefined') {
-    if (currentTetoIndex === null) {
+  if (tetoValor && window.TETOS) {
+    if (window.currentTetoIndex === null) {
       tetoValor.innerHTML = 'Sem teto configurado';
-    } else {
-      const teto = TETOS[currentTetoIndex];
-      const percent = typeof totalConsumo !== 'undefined' ? Math.min((totalConsumo / teto.valor) * 100, 100).toFixed(0) : 0;
+    } else if (window.TETOS[window.currentTetoIndex]) {
+      const teto = window.TETOS[window.currentTetoIndex];
+      const consumo = window.totalConsumo || 0;
+      const percent = Math.min((consumo / teto.valor) * 100, 100).toFixed(0);
       tetoValor.innerHTML = `Teto de <span class="highlight">${formatMoney(teto.valor)}</span> · Consumo previsto: <span class="highlight">${percent}%</span>`;
+      console.log('Teto:', teto.valor, 'Consumo:', consumo, 'Percent:', percent);
     }
   }
   
@@ -2460,19 +2460,26 @@ function atualizarResumoInterativo() {
   const roiPercentual = document.getElementById('resumo-roi-percentual');
   const roiLucro = document.getElementById('resumo-roi-lucro');
   
-  if (roiInvestimento && typeof totalInvestimento !== 'undefined') {
-    roiInvestimento.textContent = formatMoney(totalInvestimento);
+  if (roiInvestimento && typeof window.totalInvestimento !== 'undefined') {
+    roiInvestimento.textContent = formatMoney(window.totalInvestimento);
+    console.log('Investimento:', window.totalInvestimento);
   }
-  if (roiFaturamento && typeof totalFaturamento !== 'undefined') {
-    roiFaturamento.textContent = formatMoney(totalFaturamento);
+  if (roiFaturamento && typeof window.totalFaturamento !== 'undefined') {
+    roiFaturamento.textContent = formatMoney(window.totalFaturamento);
+    console.log('Faturamento:', window.totalFaturamento);
   }
-  if (roiPercentual && typeof roiPercent !== 'undefined') {
-    roiPercentual.textContent = (roiPercent > 0 ? '+' : '') + roiPercent.toFixed(0) + '%';
+  if (roiPercentual && typeof window.roiPercent !== 'undefined') {
+    roiPercentual.textContent = (window.roiPercent > 0 ? '+' : '') + window.roiPercent.toFixed(0) + '%';
+    console.log('ROI%:', window.roiPercent);
   }
-  if (roiLucro && typeof lucroLiquido !== 'undefined') {
-    roiLucro.textContent = formatMoney(lucroLiquido);
+  if (roiLucro && typeof window.lucroLiquido !== 'undefined') {
+    roiLucro.textContent = formatMoney(window.lucroLiquido);
+    console.log('Lucro:', window.lucroLiquido);
   }
+  
+  console.log('Resumo atualizado completamente!');
 }
+
 
 // Fechar modal ao clicar fora
 document.addEventListener('click', function(e) {
