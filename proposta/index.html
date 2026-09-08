@@ -1083,11 +1083,11 @@
       <div class="hero-rule"></div>
     </div>
 
-    <!-- LEAD (opcional) -->
+    <!-- CNPJ -->
     <div class="step-card">
-      <div class="step-title">Nome do lead <span class="step-optional-tag">Opcional</span></div>
+      <div class="step-title">CNPJ para proposta</div>
       <div class="step-desc">Aparece no topo da proposta gerada.</div>
-      <input type="text" id="leadName" placeholder="Ex.: João Silva — Loja XPTO" style="width:100%; font-family:'Sora',sans-serif; font-size:15px; font-weight:600; border:none; border-bottom:1.5px solid var(--line); padding:8px 2px 10px; color:var(--ink); background:transparent;"/>
+      <input type="text" id="leadName" placeholder="00.000.000/0000-00" style="width:100%; font-family:'Sora',sans-serif; font-size:15px; font-weight:600; border:none; border-bottom:1.5px solid var(--line); padding:8px 2px 10px; color:var(--ink); background:transparent;"/>
     </div>
 
     <!-- PASSO 1 -->
@@ -1104,8 +1104,9 @@
         </div>
       </div>
 
-      <input type="range" id="tierSlider" min="0" max="32" step="1" value="3"/>
+      <input type="range" id="tierSlider" min="0" max="27" step="1" value="0"/>
       <div class="range-marks" id="rangeMarks"></div>
+      <input type="number" id="atendidosInput" min="500" step="1" value="3000" style="margin-top:14px; width:120px; font-family:'Sora',sans-serif; font-size:13px; font-weight:600; padding:8px 10px; border:1.5px solid var(--line); border-radius:10px; color:var(--ink); background:var(--wash);"/>
       <div class="tier-note" id="tierNote">valor estimado por interpolação — confirmar na tabela oficial</div>
     </div>
 
@@ -1656,7 +1657,7 @@ const CANAIS = [
   { id: 'marketing',   nome: 'Marketing',   sub: 'Campanhas de atração · Marketing',     tarifa: 0.394 },
 ];
 
-const state = { atendidos: 2000, tetoIndex: 1, canais: {}, mensagens: { marketing: 0, utilidade: 0, autenticacao: 0, servico: 0 } };
+const state = { atendidos: 3000, tetoIndex: 1, canais: {}, mensagens: { marketing: 0, utilidade: 0, autenticacao: 0, servico: 0 } };
 const TARIFAS = { marketing: 0.394, utilidade: 0.043, autenticacao: 0.043, servico: 0.000 };
 CANAIS.forEach(c => state.canais[c.id] = { ativo: false, disparos: 0, resposta: 0 });
 
@@ -1688,13 +1689,13 @@ function tierFor(atendidos) {
 // Por isso o slider representa um ÍNDICE numa lista de passos com espaçamento
 // visual uniforme — o valor real de atendidos vem de STEPS[índice].
 const STEPS = [];
-for (let v = 500; v <= 10000; v += 500) STEPS.push(v);
+for (let v = 3000; v <= 10000; v += 500) STEPS.push(v);
 for (let v = 15000; v <= 50000; v += 5000) STEPS.push(v);
 for (let v = 60000; v <= 100000; v += 10000) STEPS.push(v);
 
 // Marcações visuais na régua — mais pontos de referência que os 5 preços
 // confirmados (TIERS). Os valores entre eles usam o preço interpolado normalmente.
-const MARKS = [500, 2500, 5000, 10000, 25000, 50000, 100000];
+const MARKS = [3000, 5000, 10000, 25000, 50000, 100000];
 
 function stepIndexFor(atendidos) {
   let closest = 0, closestDiff = Infinity;
@@ -1723,7 +1724,21 @@ MARKS.forEach((atendidos) => {
   mark.onclick = () => { state.atendidos = atendidos; tierSlider.value = stepIndexFor(atendidos); renderAll(); };
   rangeMarks.appendChild(mark);
 });
-tierSlider.addEventListener('input', () => { state.atendidos = STEPS[parseInt(tierSlider.value, 10)]; renderAll(); });
+tierSlider.addEventListener('input', () => {
+  state.atendidos = STEPS[parseInt(tierSlider.value, 10)];
+  document.getElementById('atendidosInput').value = state.atendidos;
+  renderAll();
+});
+
+const atendidosInput = document.getElementById('atendidosInput');
+atendidosInput.addEventListener('input', () => {
+  const v = parseInt(atendidosInput.value, 10);
+  if (!isNaN(v) && v >= 500) {
+    state.atendidos = v;
+    tierSlider.value = stepIndexFor(v);
+    renderAll();
+  }
+});
 
 function updateSliderFill() {
   const idx = stepIndexFor(state.atendidos);
@@ -1835,6 +1850,7 @@ function renderAll() {
   priceEl.textContent = fmtBRL(tr.preco);
   priceEl.classList.remove('pulse'); void priceEl.offsetWidth; priceEl.classList.add('pulse');
   document.getElementById('priceAtendidos').textContent = fmtNum(state.atendidos);
+  document.getElementById('atendidosInput').value = state.atendidos;
   const atEl = document.getElementById('priceAtendidos');
   atEl.classList.remove('pulse'); void atEl.offsetWidth; atEl.classList.add('pulse');
   document.getElementById('priceDiscount').textContent = tr.desconto > 0 ? ` · ${tr.desconto}% de desconto por volume` : '';
