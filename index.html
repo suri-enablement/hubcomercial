@@ -123,8 +123,8 @@
     --faint: #94a3b8;
     --line: #e1e5ec;
     --gray: #8592ab;
-    --shadow: 0 2px 10px rgba(16,24,40,0.08);
-    --shadow-hover: 0 10px 28px rgba(16,24,40,0.14);
+    --shadow: 0 24px 48px rgba(16,24,40,0.22), 0 8px 20px rgba(16,24,40,0.12);
+    --shadow-hover: 0 32px 64px rgba(16,24,40,0.28), 0 12px 28px rgba(16,24,40,0.16);
   }
   html.light-theme body {
     background: linear-gradient(90deg, #ffffff 0%, #ffffff 45%, #d9e2f7 100%);
@@ -227,28 +227,28 @@
     position: relative;
     background: var(--bg-card);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 28px 24px;
+    border-radius: 24px;
+    padding: 36px 32px;
     box-shadow: var(--shadow);
     text-decoration: none;
     color: inherit;
     display: block;
-    transition: transform 0.2s, box-shadow 0.2s, border-color .2s;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color .25s ease;
     cursor: pointer;
   }
-  .role-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--blue-dim); }
+  .role-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--blue-dim); }
 
   .role-card-icon {
-    width: 46px; height: 46px;
-    border-radius: 13px;
-    background: var(--bg-card2);
-    border: 1px solid var(--line);
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: transparent;
+    border: none;
     display: flex; align-items: center; justify-content: center;
     font-size: 20px;
     margin-bottom: 18px;
   }
-  .role-card-title { font-size: 17px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
-  .role-card-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+  .role-card-title { font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 10px; letter-spacing: -0.2px; }
+  .role-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 22px; }
   .role-card-materials { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
   .material-row { display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--white); font-weight: 600; }
   .material-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
@@ -258,13 +258,13 @@
 
   /* — variante verde em evidência (Novidades Meta) — */
   .role-card-green {
-    border: 1.5px solid rgba(0,196,140,0.55);
-    background: linear-gradient(160deg, rgba(0,196,140,0.09), var(--bg-card) 60%);
-    box-shadow: var(--shadow), 0 0 0 1px rgba(0,196,140,0.08), 0 0 24px rgba(0,196,140,0.12);
+    border: 1px solid rgba(0,196,140,0.4);
+    background: linear-gradient(160deg, rgba(0,196,140,0.07), var(--bg-card) 60%);
+    box-shadow: var(--shadow), 0 0 0 1px rgba(0,196,140,0.06);
     position: relative;
   }
   .role-card-green:hover { border-color: rgba(0,196,140,0.85); box-shadow: var(--shadow-hover), 0 0 32px rgba(0,196,140,0.22); }
-  .role-card-green .role-card-icon { background: rgba(0,196,140,0.16); border-color: rgba(0,196,140,0.4); }
+  .role-card-green .role-card-icon { background: transparent; }
   .role-card-green .material-dot { background: var(--green); }
   .role-card-green .role-card-cta { color: #4ee8b5; font-weight: 800; }
   .role-card-green-badge {
