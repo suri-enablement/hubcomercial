@@ -218,6 +218,13 @@
   }
   .msg-row input:focus { outline: none; border-color: var(--blue); }
   .msg-row input::placeholder { color: var(--ink-faint); font-weight: 500; }
+  .msg-row input:disabled { color: var(--ink-faint); cursor: not-allowed; opacity: 0.6; }
+  .msg-servico-note {
+    margin-top: 12px; padding: 10px 14px; background: rgba(217,180,64,0.08);
+    border: 1px solid rgba(217,180,64,0.25); border-radius: 10px;
+    font-size: 11px; color: var(--ink-soft); line-height: 1.5;
+  }
+  .msg-servico-note b { color: var(--ink); }
   .msg-valor { font-size: 13.5px; font-weight: 700; color: var(--ink); text-align: right; font-variant-numeric: tabular-nums; }
   .msg-total-row {
     display: flex; align-items: baseline; justify-content: space-between;
@@ -488,8 +495,95 @@
     line-height: 1.5; margin-bottom: 20px;
   }
 
+  /* ── BLOCOS "PASSA A SER COBRADO" / "GRATUITO" ── */
+  .cobranca-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .cobranca-block { border-radius: 16px; padding: 18px 20px; }
+  .cobranca-block-coral { background: rgba(255,177,153,0.1); border: 1.5px solid rgba(255,177,153,0.3); }
+  .cobranca-block-green { background: rgba(52,211,153,0.1); border: 1.5px solid rgba(52,211,153,0.3); }
+  .cobranca-block-tag {
+    display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.6px;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 12px;
+  }
+  .cobranca-block-coral .cobranca-block-tag { background: rgba(255,177,153,0.22); color: var(--coral); }
+  .cobranca-block-green .cobranca-block-tag { background: rgba(52,211,153,0.22); color: var(--green-live); }
+  .cobranca-block-item {
+    font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 10px;
+  }
+  .cobranca-block-item:last-child { margin-bottom: 0; }
+  .cobranca-block-item b { color: var(--ink); }
+  @media (max-width: 768px) {
+    .cobranca-blocks { grid-template-columns: 1fr; }
+  }
+
   /* ── IMPACT / ROI GRIDS ── */
   .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .canal-field-fixed {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    padding: 10px 2px;
+    border-bottom: 1.5px dashed var(--line);
+  }
+  .canal-field-fixed-note {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-faint);
+  }
+
+  /* ── CALCULADORAS (réplica suri.ai/novo-modelo-whatsapp) ── */
+  .calc-tag {
+    display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.6px;
+    text-transform: uppercase; background: var(--blue-light); color: var(--blue);
+    padding: 4px 12px; border-radius: 100px; margin-bottom: 12px;
+  }
+  .calc-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; }
+  .calc-panel { border-radius: 16px; padding: 20px 22px; background: var(--wash); border: 1px solid var(--line); }
+  .calc-panel-green { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.3); }
+  .calc-panel-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .calc-stat { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .calc-stat:last-of-type { border-bottom: none; }
+  .calc-stat-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 6px;
+  }
+  .calc-stat-value { font-size: 23px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .calc-stat-hero {
+    background: rgba(52,211,153,0.14);
+    border: 1.5px solid rgba(52,211,153,0.45);
+    border-bottom: 1.5px solid rgba(52,211,153,0.45);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 4px 0;
+  }
+  .calc-stat-value-hero {
+    font-size: 34px;
+    color: var(--green-live);
+  }
+  .calc-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0 0; font-size: 12.5px; color: var(--ink-soft);
+    border-top: 1px solid var(--line); margin-top: 6px;
+  }
+  .calc-row b { color: var(--ink); font-weight: 700; }
+  .calc-footnote {
+    margin-top: 18px; padding: 14px 16px; background: rgba(217,180,64,0.1);
+    border: 1px solid rgba(217,180,64,0.3); border-radius: 12px;
+    font-size: 11.5px; color: var(--ink-soft); line-height: 1.55;
+  }
+  .calc-footnote b { color: var(--ink); }
+  .calc-hero-stat {
+    background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3);
+    border-radius: 16px; padding: 18px 22px; margin-top: 22px;
+  }
+  .calc-hero-stat-label {
+    font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--green-live); margin-bottom: 6px;
+  }
+  .calc-hero-stat-value { font-size: 32px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+  @media (max-width: 768px) {
+    .calc-panels { grid-template-columns: 1fr; }
+  }
   .impact-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
   .impact-stat { background: var(--wash); border-radius: 14px; padding: 16px 18px; }
   .impact-stat-label { font-size: 10.5px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
@@ -659,6 +753,9 @@
     --lavender: #5850ec;
     --green-live: #059669;
     --shadow: 0 2px 10px rgba(16,24,40,0.08);
+  }
+  html.light-theme body {
+    background: linear-gradient(90deg, #ffffff 0%, #ffffff 45%, #d9e2f7 100%);
   }
 
   /* ══════════════════════ TELA DO RESUMO ══════════════════════ */
@@ -1068,7 +1165,7 @@
 
 <div class="main-tabs no-print">
   <button class="main-tab-btn active" data-tab="proposta" onclick="switchTab('proposta')">Proposta</button>
-  <button class="main-tab-btn" data-tab="impacto" onclick="switchTab('impacto')">Impacto da Cobrança</button>
+  <button class="main-tab-btn" data-tab="impacto" onclick="switchTab('impacto')">Simulador da Nova Cobrança</button>
   <button class="main-tab-btn" data-tab="roi" onclick="switchTab('roi')">ROI do WhatsApp</button>
 </div>
 
@@ -1139,12 +1236,13 @@
           <div class="msg-valor" id="msgValor-autenticacao">R$ 0</div>
         </div>
         <div class="msg-row">
-          <div class="msg-type">Serviço <span class="msg-badge">NOVO</span></div>
-          <div class="msg-tarifa">R$ 0,000</div>
-          <input type="number" min="0" step="1" placeholder="0" id="msg-servico"/>
+          <div class="msg-type">Serviço <span class="msg-badge">GRÁTIS ATÉ 30/09</span></div>
+          <div class="msg-tarifa">R$ 0,043<br/><span style="font-size:10px;font-weight:500;color:var(--ink-faint);">a partir de 01/10</span></div>
+          <input type="number" min="0" step="1" placeholder="0" id="msg-servico" value="0" disabled title="Ainda gratuito — a cobrança só começa em 01/10/2026. Use o Simulador da Nova Cobrança pra estimar o impacto."/>
           <div class="msg-valor" id="msgValor-servico">R$ 0</div>
         </div>
       </div>
+      <div class="msg-servico-note">Mensagens de serviço ainda não entram no valor da proposta — são gratuitas até 30/09/2026. Para estimar o impacto a partir de 01/10, use o <b>Simulador da Nova Cobrança</b>.</div>
 
       <div class="msg-total-row">
         <div class="msg-total-label">Total do consumo estimado</div>
@@ -1391,59 +1489,85 @@
 
     <div class="hero">
       <div class="hero-badge">A partir de 1º de outubro de 2026</div>
-      <h1>Quanto a nova cobrança <span class="lav">impacta sua operação?</span></h1>
+      <h1>Quanto o cliente vai <span class="lav">passar a pagar por mensagens de serviço?</span></h1>
     </div>
 
-    <div class="disclaimer-bar no-print">
-      Valor sinalizado pela Meta para mensagens de Serviço (ainda não oficial) — o guia indica que deve equivaler ao preço atual de Utilidade, R$0,04, o mesmo valor usado na Proposta Comercial (modelo margem zero). A Meta publica a taxa oficial em 1º de setembro de 2026.
+    <div class="cobranca-blocks no-print">
+      <div class="cobranca-block cobranca-block-coral">
+        <div class="cobranca-block-tag">Passa a ser cobrado</div>
+        <div class="cobranca-block-item">Mensagens de serviço (respostas de atendentes, automações ou IA) que excederem a franquia mensal — <b>R$ 0,043 por mensagem</b>, já com impostos.</div>
+      </div>
+      <div class="cobranca-block cobranca-block-green">
+        <div class="cobranca-block-tag">Gratuito</div>
+        <div class="cobranca-block-item"><b>1.000 mensagens de serviço por mês</b>, por número de WhatsApp — franquia renovada mensalmente, cobrança só a partir da 1.001ª mensagem.</div>
+        <div class="cobranca-block-item">Janela gratuita de <b>72 horas</b> para conversas iniciadas por anúncios Click-to-WhatsApp ou botões de chamada para ação do Facebook.</div>
+      </div>
     </div>
 
     <div class="step-card">
-      <div class="step-title">Simule o custo por atendimento</div>
-      <div class="step-desc">Quantas mensagens de Serviço uma conversa típica consome, e quantos atendimentos sua operação faz por mês?</div>
+      <div class="calc-tag">Calculadora 01</div>
+      <div class="step-title">Impacto estimado das mensagens de serviço</div>
+      <div class="step-desc">Simule o custo oficial considerando automaticamente a franquia mensal da Meta para 1 número de WhatsApp.</div>
 
       <div class="impact-grid">
         <div class="canal-field">
-          <label>Atendimentos/mês</label>
-          <input type="number" min="0" step="100" id="impAtendimentos" value="5000"/>
+          <label>Conversas/mês</label>
+          <input type="number" min="0" step="100" id="impConversas" value="5000"/>
         </div>
         <div class="canal-field">
-          <label>Mensagens de serviço/atendimento</label>
+          <label>Mensagens/conversa</label>
           <input type="number" min="0" step="1" id="impMensagens" value="40"/>
         </div>
         <div class="canal-field">
-          <label>Preço por mensagem (sinalizado)</label>
-          <input type="number" min="0" step="0.001" id="impPreco" value="0.000"/>
+          <label>Após otimização</label>
+          <input type="number" min="0" step="1" id="impMensagensOtim" value="30"/>
+        </div>
+        <div class="canal-field">
+          <label>Valor/mensagem com impostos</label>
+          <input type="number" min="0" step="0.001" id="impPreco" value="0.043" disabled title="Valor confirmado pela Meta — não editável."/>
         </div>
       </div>
-    </div>
 
-    <div class="step-card">
-      <div class="step-desc" style="margin-bottom:8px;">Custo por conversa, a partir de outubro/26</div>
-      <div class="price-value" id="impCustoConversa" style="font-size:44px;">R$ 1,60</div>
-
-      <div class="live-card">
-        <div class="live-card-head">
-          <span>MENSAGENS DE SERVIÇO · A PARTIR DE OUT/26</span>
-          <span class="live-dot">● ao vivo</span>
+      <div class="calc-panels">
+        <div class="calc-panel">
+          <div class="calc-panel-title">Sem otimização</div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Mensagens de serviço no mês</div>
+            <div class="calc-stat-value" id="impMsgMes">200.000</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Custo estimado</div>
+            <div class="calc-stat-value" id="impCustoEstimado">R$ 8.557</div>
+          </div>
+          <div class="calc-row"><span>Franquia gratuita Meta</span><b id="impFranquia1">-1.000</b></div>
+          <div class="calc-row"><span>Mensagens cobradas</span><b id="impCobradas1">199.000</b></div>
         </div>
-        <div class="live-row"><span>Atendente</span><span>Já está aprovada, chega em 2 dias.</span><b id="livePrice1">+R$0,04</b></div>
-        <div class="live-row"><span>Atendente</span><span>Vou verificar essa cor no estoque</span><b id="livePrice2">+R$0,04</b></div>
-        <div class="live-row"><span>Atendente</span><span>Sim! Vou gerar o novo link.</span><b id="livePrice3">+R$0,04</b></div>
-        <div class="live-row muted" id="liveRow4"><span>Atendente</span><span id="liveRestLabel">e mais 37 mensagens da conversa</span><b id="livePrice4">+R$1,48</b></div>
-        <div class="live-total"><span>Custo acumulado da conversa</span><span id="liveTotal">R$ 1,60</span></div>
-        <div class="live-caption" id="liveCaption">Simulação de uma conversa com 40 mensagens de serviço</div>
+
+        <div class="calc-panel calc-panel-green">
+          <div class="calc-panel-title">Com otimização do Service e Commerce Agent</div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Mensagens/mês após otimização</div>
+            <div class="calc-stat-value" id="impMsgMesOtim">150.000</div>
+          </div>
+          <div class="calc-stat calc-stat-hero">
+            <div class="calc-stat-label">Novo custo estimado</div>
+            <div class="calc-stat-value calc-stat-value-hero" id="impNovoCusto">R$ 6.407</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Mensagens a menos</div>
+            <div class="calc-stat-value" id="impMsgMenos">50.000</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Economia estimada</div>
+            <div class="calc-stat-value" id="impEconomia">R$ 2.150</div>
+          </div>
+          <div class="calc-row"><span>Franquia gratuita Meta</span><b id="impFranquia2">-1.000</b></div>
+          <div class="calc-row"><span>Mensagens cobradas</span><b id="impCobradas2">149.000</b></div>
+        </div>
       </div>
 
-      <div class="impact-stats">
-        <div class="impact-stat">
-          <div class="impact-stat-label">Volume mensal de mensagens de serviço</div>
-          <div class="impact-stat-value" id="impVolume">200.000</div>
-        </div>
-        <div class="impact-stat">
-          <div class="impact-stat-label">Custo mensal adicional estimado</div>
-          <div class="impact-stat-value" id="impCustoMensal">R$ 8.000</div>
-        </div>
+      <div class="calc-footnote">
+        <b>A Meta oferece uma franquia mensal de 1.000 mensagens de serviço gratuitas por número de WhatsApp.</b> A simulação considera 1 número e aplica a franquia ao total mensal, nunca a cada conversa.
       </div>
     </div>
 
@@ -1459,73 +1583,77 @@
       <h1>Qual o <span class="lav">ROI do WhatsApp</span> na sua operação?</h1>
     </div>
 
-    <div class="disclaimer-bar no-print">
-      Fórmulas simplificadas para fins de planejamento. O custo efetivo depende das categorias de mensagem e das regras vigentes da Meta.
-    </div>
-
     <div class="step-card">
-      <div class="step-title">Dados da operação</div>
+      <div class="calc-tag">Calculadora 02</div>
+      <div class="step-title">ROI do WhatsApp</div>
+      <div class="step-desc">Coloque o custo em perspectiva com a receita potencial gerada pela operação.</div>
+
       <div class="impact-grid">
         <div class="canal-field">
-          <label>Conversas/mês</label>
-          <input type="number" min="0" step="100" id="roiConversas" value="5000"/>
+          <label>Mensagens/mês</label>
+          <input type="number" min="0" step="1000" id="roiMensagens" value="200000"/>
         </div>
         <div class="canal-field">
-          <label>Mensagens de serviço/conversa</label>
-          <input type="number" min="0" step="1" id="roiMensagens" value="40"/>
+          <label>Vendas/mês</label>
+          <input type="number" min="0" step="10" id="roiVendas" value="900"/>
         </div>
         <div class="canal-field">
-          <label>Preço por mensagem</label>
-          <input type="number" min="0" step="0.001" id="roiPreco" value="0.000"/>
+          <label>Ticket médio</label>
+          <input type="number" min="0" step="10" id="roiTicket" value="300"/>
         </div>
         <div class="canal-field">
-          <label>Taxa de conversão (%)</label>
-          <input type="number" min="0" max="100" step="1" id="roiConversao" value="20"/>
+          <label>Valor/mensagem com impostos</label>
+          <input type="number" min="0" step="0.001" id="roiPreco" value="0.043"/>
         </div>
         <div class="canal-field">
-          <label>Ticket médio (R$)</label>
-          <input type="number" min="0" step="10" id="roiTicket" value="150"/>
-        </div>
-        <div class="canal-field">
-          <label>Simular c/ menos mensagens (opcional)</label>
-          <input type="number" min="0" step="1" id="roiMensagensOtim" placeholder="ex: 30"/>
+          <label>Redução de mensagens com Service e Commerce Agent (%)</label>
+          <input type="number" min="0" max="100" step="1" id="roiReducao" value="25"/>
         </div>
       </div>
-    </div>
 
-    <div class="step-card">
-      <div class="feature-table" id="roiTable" style="margin-bottom:0;">
-        <div class="feature-row"><div class="feature-label">Custo mensal de mensageria</div><div class="feature-value big" id="roiCustoMensal">—</div></div>
-        <div class="feature-row"><div class="feature-label">Custo por conversa</div><div class="feature-value" id="roiCustoConversa">—</div></div>
-        <div class="feature-row"><div class="feature-label">Número de vendas estimado</div><div class="feature-value" id="roiNumVendas">—</div></div>
-        <div class="feature-row"><div class="feature-label">Custo por venda</div><div class="feature-value big" id="roiCustoVenda">—</div></div>
-        <div class="feature-row"><div class="feature-label">Receita estimada</div><div class="feature-value big" id="roiReceita">—</div></div>
-        <div class="feature-row"><div class="feature-label">ROI do canal</div><div class="feature-value big" id="roiResultado" style="color:var(--lavender);">—</div></div>
+      <div class="calc-hero-stat">
+        <div class="calc-hero-stat-label">Receita estimada</div>
+        <div class="calc-hero-stat-value" id="roiReceita">R$ 270.000,00</div>
       </div>
-    </div>
 
-    <div class="step-card" id="roiCompareCard" style="display:none;">
-      <div class="step-title">Comparativo — reduzindo mensagens por conversa</div>
-      <div class="compare-grid">
-        <div class="compare-col">
-          <div class="compare-col-label">Hoje</div>
-          <div class="compare-col-value" id="roiHojeCusto">—</div>
-          <div class="compare-col-sub">custo por venda</div>
-          <div class="compare-col-value" id="roiHojeRoi">—</div>
-          <div class="compare-col-sub">ROI</div>
+      <div class="calc-panels">
+        <div class="calc-panel">
+          <div class="calc-panel-title">Sem otimização</div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Para cada R$1 investido retorna</div>
+            <div class="calc-stat-value" id="roiRetorno1">R$ 31,40</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Percentual de retorno</div>
+            <div class="calc-stat-value" id="roiPercentual1">3.040%</div>
+          </div>
         </div>
-        <div class="compare-col highlight">
-          <div class="compare-col-label">Com menos mensagens</div>
-          <div class="compare-col-value" id="roiOtimCusto">—</div>
-          <div class="compare-col-sub">custo por venda</div>
-          <div class="compare-col-value" id="roiOtimRoi">—</div>
-          <div class="compare-col-sub">ROI</div>
+
+        <div class="calc-panel calc-panel-green">
+          <div class="calc-panel-title">Com otimização do Service e Commerce Agent</div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Para cada R$1 investido retorna</div>
+            <div class="calc-stat-value" id="roiRetorno2">R$ 41,86</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Percentual de retorno</div>
+            <div class="calc-stat-value" id="roiPercentual2">4.086%</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Economia em mensageria</div>
+            <div class="calc-stat-value" id="roiEconomia">R$ 2.150,00</div>
+          </div>
         </div>
+      </div>
+
+      <div class="calc-footnote">
+        ROI = (receita – investimento em mensageria) ÷ investimento em mensageria. É uma simulação, não promessa de resultado.
       </div>
     </div>
 
   </div>
 </main>
+
 
 <!-- ══════ MODAL — ENTENDER A MUDANÇA ══════ -->
 <div class="modal-overlay no-print" id="modalEntender">
@@ -1635,13 +1763,182 @@ document.querySelectorAll('.resumo-toggles input[type="checkbox"]').forEach(cb =
 // TIERS: 5 faixas de volumetria confirmadas nos prints (500 a 100.000 atendidos).
 // TETOS: confirmados no print do Movimento 03 (Controle).
 // ─────────────────────────────────────────────
-const TIERS = [
-  { atendidos: 500,    preco: 650,   desconto: 0,  label: '500' },
-  { atendidos: 2500,   preco: 2350,  desconto: 28, label: '2.500' },
-  { atendidos: 5000,   preco: 4350,  desconto: 33, label: '5.000' },
-  { atendidos: 10000,  preco: 8200,  desconto: 37, label: '10.000' },
-  { atendidos: 100000, preco: 52000, desconto: 60, label: '100.000' },
+// Tabela oficial validada (planilha "Tabela de Preços - Versão Validada"),
+// 500 a 10.000 de 500 em 500, 10.000 a 100.000 de 1.000 em 1.000,
+// 100.000 a 400.000 de 5.000 em 5.000. Cada par é [atendidos, valor do plano].
+const TIERS_TABLE = [
+  [500,650],
+  [1000,1105],
+  [1500,1560],
+  [2000,1950],
+  [2500,2356],
+  [3000,2730],
+  [3500,3150],
+  [4000,3560],
+  [4500,3960],
+  [5000,4350],
+  [5500,4758],
+  [6000,5160],
+  [6500,5558],
+  [7000,5950],
+  [7500,6337],
+  [8000,6720],
+  [8500,7097],
+  [9000,7470],
+  [9500,7838],
+  [10000,8200],
+  [11000,8972],
+  [12000,9735],
+  [13000,10490],
+  [14000,11236],
+  [15000,11973],
+  [16000,12702],
+  [17000,13422],
+  [18000,14133],
+  [19000,14835],
+  [20000,15529],
+  [21000,16214],
+  [22000,16890],
+  [23000,17557],
+  [24000,18216],
+  [25000,18866],
+  [26000,19508],
+  [27000,20140],
+  [28000,20764],
+  [29000,21380],
+  [30000,21986],
+  [31000,22719],
+  [32000,23139],
+  [33000,23559],
+  [34000,23979],
+  [35000,24399],
+  [36000,24819],
+  [37000,25239],
+  [38000,25659],
+  [39000,26079],
+  [40000,26499],
+  [41000,26919],
+  [42000,27339],
+  [43000,27759],
+  [44000,28179],
+  [45000,28599],
+  [46000,29019],
+  [47000,29439],
+  [48000,29859],
+  [49000,30279],
+  [50000,30699],
+  [51000,31119],
+  [52000,31539],
+  [53000,31959],
+  [54000,32379],
+  [55000,32799],
+  [56000,33219],
+  [57000,33639],
+  [58000,34059],
+  [59000,34479],
+  [60000,34899],
+  [61000,35319],
+  [62000,35739],
+  [63000,36159],
+  [64000,36579],
+  [65000,36999],
+  [66000,37419],
+  [67000,37839],
+  [68000,38259],
+  [69000,38679],
+  [70000,39099],
+  [71000,39519],
+  [72000,39939],
+  [73000,40359],
+  [74000,40779],
+  [75000,41199],
+  [76000,41619],
+  [77000,42039],
+  [78000,42459],
+  [79000,42879],
+  [80000,43299],
+  [81000,43719],
+  [82000,44139],
+  [83000,44559],
+  [84000,44979],
+  [85000,45399],
+  [86000,45819],
+  [87000,46239],
+  [88000,46659],
+  [89000,47079],
+  [90000,47499],
+  [91000,47919],
+  [92000,48339],
+  [93000,48759],
+  [94000,49179],
+  [95000,49599],
+  [96000,50019],
+  [97000,50439],
+  [98000,50859],
+  [99000,51279],
+  [100000,51699],
+  [105000,54284],
+  [110000,56869],
+  [115000,59454],
+  [120000,62039],
+  [125000,64624],
+  [130000,67209],
+  [135000,69794],
+  [140000,72379],
+  [145000,74964],
+  [150000,77549],
+  [155000,80134],
+  [160000,82719],
+  [165000,85304],
+  [170000,87889],
+  [175000,90474],
+  [180000,93059],
+  [185000,95644],
+  [190000,98229],
+  [195000,100814],
+  [200000,103399],
+  [205000,105984],
+  [210000,108569],
+  [215000,111154],
+  [220000,113739],
+  [225000,116324],
+  [230000,118909],
+  [235000,121494],
+  [240000,124079],
+  [245000,126664],
+  [250000,129249],
+  [255000,131834],
+  [260000,134419],
+  [265000,137004],
+  [270000,139589],
+  [275000,142174],
+  [280000,144759],
+  [285000,147344],
+  [290000,149929],
+  [295000,152514],
+  [300000,155099],
+  [305000,157684],
+  [310000,160269],
+  [315000,162854],
+  [320000,165439],
+  [325000,168024],
+  [330000,170609],
+  [335000,173194],
+  [340000,175779],
+  [345000,178364],
+  [350000,180949],
+  [355000,183534],
+  [360000,186119],
+  [365000,188704],
+  [370000,191289],
+  [375000,193874],
+  [380000,196459],
+  [385000,199044],
+  [390000,201629],
+  [395000,204214],
+  [400000,206799]
 ];
+
 
 const TETOS = [
   { valor: 500,  label: 'R$ 500' },
@@ -1658,30 +1955,48 @@ const CANAIS = [
 ];
 
 const state = { atendidos: 3000, tetoIndex: 1, canais: {}, mensagens: { marketing: 0, utilidade: 0, autenticacao: 0, servico: 0 } };
-const TARIFAS = { marketing: 0.394, utilidade: 0.043, autenticacao: 0.043, servico: 0.000 };
+const TARIFAS = { marketing: 0.394, utilidade: 0.043, autenticacao: 0.043, servico: 0.043 };
 CANAIS.forEach(c => state.canais[c.id] = { ativo: false, disparos: 0, resposta: 0 });
 
 function fmtBRL(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
 function fmtNum(n) { return Math.round(n).toLocaleString('pt-BR'); }
 
-// Interpola preço/desconto entre os 5 pontos confirmados.
-// Retorna { preco, desconto, confirmado } — confirmado=false quando o valor
-// não é um dos 5 pontos oficiais (500/2.500/5.000/10.000/100.000), e sim calculado
-// por interpolação linear entre os dois pontos vizinhos.
-function tierFor(atendidos) {
-  const exact = TIERS.find(t => t.atendidos === atendidos);
-  if (exact) return { preco: exact.preco, desconto: exact.desconto, confirmado: true };
+// Taxa cheia (sem desconto), usada como base pra calcular o % de desconto exibido.
+const TAXA_CHEIA = TIERS_TABLE[0][1] / TIERS_TABLE[0][0]; // R$ 1,30/cliente
 
-  let lo = TIERS[0], hi = TIERS[TIERS.length - 1];
-  for (let i = 0; i < TIERS.length - 1; i++) {
-    if (atendidos >= TIERS[i].atendidos && atendidos <= TIERS[i + 1].atendidos) {
-      lo = TIERS[i]; hi = TIERS[i + 1]; break;
+// Busca na tabela oficial. Valor exato -> ponto oficial (confirmado=true).
+// Valor entre dois pontos da tabela -> interpolação linear entre eles (confirmado=false).
+// Abaixo do menor ponto ou acima do maior -> trava no valor cheio mais próximo (clamp).
+function tierFor(atendidos) {
+  const table = TIERS_TABLE;
+  if (atendidos <= table[0][0]) {
+    const preco = table[0][1] * (atendidos / table[0][0]);
+    return { preco, desconto: 0, confirmado: atendidos === table[0][0] };
+  }
+  const last = table[table.length - 1];
+  if (atendidos >= last[0]) {
+    const preco = atendidos * (last[1] / last[0]);
+    const desconto = Math.round((1 - (preco / atendidos) / TAXA_CHEIA) * 100);
+    return { preco, desconto, confirmado: atendidos === last[0] };
+  }
+
+  for (let i = 0; i < table.length - 1; i++) {
+    const [aLo, pLo] = table[i];
+    const [aHi, pHi] = table[i + 1];
+    if (atendidos === aLo) {
+      const desconto = Math.round((1 - (pLo / aLo) / TAXA_CHEIA) * 100);
+      return { preco: pLo, desconto, confirmado: true };
+    }
+    if (atendidos > aLo && atendidos < aHi) {
+      const frac = (atendidos - aLo) / (aHi - aLo);
+      const preco = pLo + frac * (pHi - pLo);
+      const desconto = Math.round((1 - (preco / atendidos) / TAXA_CHEIA) * 100);
+      return { preco, desconto, confirmado: false };
     }
   }
-  const frac = (atendidos - lo.atendidos) / (hi.atendidos - lo.atendidos);
-  const preco = lo.preco + frac * (hi.preco - lo.preco);
-  const desconto = lo.desconto + frac * (hi.desconto - lo.desconto);
-  return { preco, desconto: Math.round(desconto), confirmado: false };
+  const [aEnd, pEnd] = table[table.length - 1];
+  const desconto = Math.round((1 - (pEnd / aEnd) / TAXA_CHEIA) * 100);
+  return { preco: pEnd, desconto, confirmado: true };
 }
 
 // Escala não-linear: sliders numéricos com faixa muito ampla (500 a 100.000)
@@ -1990,6 +2305,10 @@ function editarProposta() {
 function switchTab(tab) {
   document.body.dataset.tab = tab;
   document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  if (tab === 'impacto') {
+    document.getElementById('impConversas').value = state.atendidos;
+    renderImpacto();
+  }
   window.scrollTo(0, 0);
 }
 
@@ -2006,89 +2325,79 @@ function closeModal() {
 }
 
 // ─────────────────────────────────────────────
-// CALCULADORA DE IMPACTO
+// CALCULADORA 01 — Impacto estimado das mensagens de serviço
+// Réplica fiel da calculadora oficial (suri.ai/novo-modelo-whatsapp).
+// Franquia fixa: 1.000 mensagens de serviço gratuitas/mês por número de WhatsApp.
 // ─────────────────────────────────────────────
-const impIds = ['impAtendimentos', 'impMensagens', 'impPreco'];
+const FRANQUIA_META = 1000;
+const impIds = ['impConversas', 'impMensagens', 'impMensagensOtim'];
 function renderImpacto() {
-  const atendimentos = parseFloat(document.getElementById('impAtendimentos').value) || 0;
+  const conversas = parseFloat(document.getElementById('impConversas').value) || 0;
   const mensagens = parseFloat(document.getElementById('impMensagens').value) || 0;
+  const mensagensOtim = parseFloat(document.getElementById('impMensagensOtim').value) || 0;
   const preco = parseFloat(document.getElementById('impPreco').value) || 0;
 
-  const custoConversa = mensagens * preco;
-  const volumeMensal = atendimentos * mensagens;
-  const custoMensal = volumeMensal * preco;
+  const msgMes = conversas * mensagens;
+  const cobradas1 = Math.max(msgMes - FRANQUIA_META, 0);
+  const custoEstimado = cobradas1 * preco;
 
-  document.getElementById('impCustoConversa').textContent = 'R$ ' + custoConversa.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  document.getElementById('impVolume').textContent = fmtNum(volumeMensal);
-  document.getElementById('impCustoMensal').textContent = fmtBRL(custoMensal);
+  const msgMesOtim = conversas * mensagensOtim;
+  const cobradas2 = Math.max(msgMesOtim - FRANQUIA_META, 0);
+  const novoCusto = cobradas2 * preco;
 
-  // live card — 3 mensagens de exemplo (custo real de 1 mensagem cada) +
-  // uma linha agregada com o restante da conversa. O total bate exatamente
-  // com o "custo por conversa" acima, seja qual for o nº de mensagens.
-  const unit = 'R$ ' + preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const exemplosVisiveis = Math.min(mensagens, 3);
-  [1, 2, 3].forEach(n => {
-    const row = document.getElementById('livePrice' + n).closest('.live-row');
-    const visible = n <= exemplosVisiveis;
-    row.style.display = visible ? 'flex' : 'none';
-    if (visible) document.getElementById('livePrice' + n).textContent = '+' + unit;
-  });
+  const msgMenos = msgMes - msgMesOtim;
+  const economia = custoEstimado - novoCusto;
 
-  const restante = Math.max(mensagens - exemplosVisiveis, 0);
-  const custoRestante = restante * preco;
-  document.getElementById('liveRestLabel').textContent = restante > 0
-    ? `e mais ${fmtNum(restante)} mensagens da conversa`
-    : 'sem mensagens adicionais';
-  document.getElementById('livePrice4').textContent = '+R$ ' + custoRestante.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  document.getElementById('liveRow4').style.display = restante > 0 ? 'flex' : 'none';
+  document.getElementById('impMsgMes').textContent = fmtNum(msgMes);
+  document.getElementById('impCustoEstimado').textContent = fmtBRL(custoEstimado);
+  document.getElementById('impFranquia1').textContent = '-' + fmtNum(FRANQUIA_META);
+  document.getElementById('impCobradas1').textContent = fmtNum(cobradas1);
 
-  document.getElementById('liveTotal').textContent = 'R$ ' + custoConversa.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  document.getElementById('liveCaption').textContent = `Simulação de uma conversa com ${fmtNum(mensagens)} mensagens de serviço`;
+  document.getElementById('impMsgMesOtim').textContent = fmtNum(msgMesOtim);
+  document.getElementById('impNovoCusto').textContent = fmtBRL(novoCusto);
+  document.getElementById('impMsgMenos').textContent = fmtNum(msgMenos);
+  document.getElementById('impEconomia').textContent = fmtBRL(economia);
+  document.getElementById('impFranquia2').textContent = '-' + fmtNum(FRANQUIA_META);
+  document.getElementById('impCobradas2').textContent = fmtNum(cobradas2);
 }
 impIds.forEach(id => document.getElementById(id).addEventListener('input', renderImpacto));
 
 // ─────────────────────────────────────────────
 // CALCULADORA DE ROI
 // ─────────────────────────────────────────────
-const roiIds = ['roiConversas', 'roiMensagens', 'roiPreco', 'roiConversao', 'roiTicket', 'roiMensagensOtim'];
-function calcRoi(conversas, mensagens, preco, conversaoPct, ticket) {
-  const custoMensal = conversas * mensagens * preco;
-  const numVendas = conversas * (conversaoPct / 100);
-  const custoConversa = conversas > 0 ? custoMensal / conversas : 0;
-  const custoVenda = numVendas > 0 ? custoMensal / numVendas : 0;
-  const receita = numVendas * ticket;
-  const roi = custoMensal > 0 ? (receita - custoMensal) / custoMensal : 0;
-  return { custoMensal, numVendas, custoConversa, custoVenda, receita, roi };
-}
+// ─────────────────────────────────────────────
+// CALCULADORA 02 — ROI do WhatsApp
+// Réplica fiel da calculadora oficial (suri.ai/novo-modelo-whatsapp).
+// Investimento em mensageria aqui NÃO desconta a franquia (é o cálculo bruto
+// mensagens x preço) — assim mesmo no material de referência.
+// ─────────────────────────────────────────────
+const roiIds = ['roiMensagens', 'roiVendas', 'roiTicket', 'roiPreco', 'roiReducao'];
 function renderRoi() {
-  const conversas = parseFloat(document.getElementById('roiConversas').value) || 0;
   const mensagens = parseFloat(document.getElementById('roiMensagens').value) || 0;
-  const preco = parseFloat(document.getElementById('roiPreco').value) || 0;
-  const conversaoPct = parseFloat(document.getElementById('roiConversao').value) || 0;
+  const vendas = parseFloat(document.getElementById('roiVendas').value) || 0;
   const ticket = parseFloat(document.getElementById('roiTicket').value) || 0;
-  const otimRaw = document.getElementById('roiMensagensOtim').value;
+  const preco = parseFloat(document.getElementById('roiPreco').value) || 0;
+  const reducaoPct = parseFloat(document.getElementById('roiReducao').value) || 0;
 
-  const r = calcRoi(conversas, mensagens, preco, conversaoPct, ticket);
+  const receita = vendas * ticket;
+  const investimento = mensagens * preco;
+  const retorno1 = investimento > 0 ? receita / investimento : 0;
+  const percentual1 = investimento > 0 ? ((receita - investimento) / investimento) * 100 : 0;
 
-  document.getElementById('roiCustoMensal').textContent = fmtBRL(r.custoMensal);
-  document.getElementById('roiCustoConversa').textContent = 'R$ ' + r.custoConversa.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  document.getElementById('roiNumVendas').textContent = fmtNum(r.numVendas);
-  document.getElementById('roiCustoVenda').textContent = 'R$ ' + r.custoVenda.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  document.getElementById('roiReceita').textContent = fmtBRL(r.receita);
-  document.getElementById('roiResultado').textContent = (r.roi * 100).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) + '%';
+  const mensagensOtim = mensagens * (1 - reducaoPct / 100);
+  const investimentoOtim = mensagensOtim * preco;
+  const retorno2 = investimentoOtim > 0 ? receita / investimentoOtim : 0;
+  const percentual2 = investimentoOtim > 0 ? ((receita - investimentoOtim) / investimentoOtim) * 100 : 0;
+  const economia = investimento - investimentoOtim;
 
-  const compareCard = document.getElementById('roiCompareCard');
-  if (otimRaw && parseFloat(otimRaw) > 0) {
-    const otim = calcRoi(conversas, parseFloat(otimRaw), preco, conversaoPct, ticket);
-    compareCard.style.display = 'block';
-    document.getElementById('roiHojeCusto').textContent = 'R$ ' + r.custoVenda.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    document.getElementById('roiHojeRoi').textContent = (r.roi * 100).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) + '%';
-    document.getElementById('roiOtimCusto').textContent = 'R$ ' + otim.custoVenda.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    document.getElementById('roiOtimRoi').textContent = (otim.roi * 100).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) + '%';
-  } else {
-    compareCard.style.display = 'none';
-  }
+  document.getElementById('roiReceita').textContent = fmtBRL2(receita);
+  document.getElementById('roiRetorno1').textContent = 'R$ ' + retorno1.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  document.getElementById('roiPercentual1').textContent = fmtNum(percentual1) + '%';
+  document.getElementById('roiRetorno2').textContent = 'R$ ' + retorno2.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  document.getElementById('roiPercentual2').textContent = fmtNum(percentual2) + '%';
+  document.getElementById('roiEconomia').textContent = fmtBRL2(economia);
 }
+function fmtBRL2(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR') + ',00'; }
 roiIds.forEach(id => document.getElementById(id).addEventListener('input', renderRoi));
 
 renderImpacto();
